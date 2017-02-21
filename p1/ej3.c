@@ -12,13 +12,38 @@
      en FE9 entonces:
 
           a) ¿Qué valor es representado por &i?
+
+            Representa el comienzo de la variable i
+
           b) ¿Qué valor es representado por &j?
+
+            Representa el comienzo de la variable j
+
           c) ¿Qué valor es asignado a pj?
+
+            El valor asignado es uno aleatorio, que cambia en cada ejecución
+            del programa
+
           d) ¿Qué valor es asignado a *pj?
+
+            Introduce mediante el operador de contenido la suma de i y j, es
+            decir, introduce el valor 60
+
           e) ¿Qué valor es asignado a i?
+
+            A la variable i se le asigna el contenido de pj + 5
+
           f) ¿Qué valor es representado por pi?
+
+            Valor asignado aleatorio ya que no ha sido inicializado
+
           g) ¿Qué valor es asignado a *pi?
+
+            Contenido de la direccion de pi
+
           h) ¿Qué valor es representado por la expresión (*pi + 2)?
+
+            El contenido de pi + 2
 
 */
 
@@ -34,10 +59,14 @@ int main (){
      pi = pj;                 // pi posee el valor de pj
      *pi = i + j;             // El puntero de pi guarda 35 + 25
 
-     printf("Valor de i: %i \n",i);
-     printf("Valor de j: %i \n",j);
-     printf("Valor de pi: %i \n",pi);
-     printf("Valor de pj: %i \n",pj);
+     printf("Valor de &i: %p \n", &i);
+     printf("Valor de &j: %p \n", &j);
+     printf("Valor de pj: %i \n", pj);
+     printf("Valor de *pj: %i \n", *pj);
+     printf("Valor de i: %i \n", i);
+     printf("Valor de pi: %i \n", pi);
+     printf("Valor de *pi: %i \n", *pi);
+     printf("Valor de (*pi+2): %i \n", (*pi+2));
 
 
 
