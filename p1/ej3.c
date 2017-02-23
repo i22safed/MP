@@ -52,23 +52,30 @@
 int main (){
 
      int i, j = 25;           // Declara 2 variables y a j le asigna 25
+
      int *pi, *pj = &i;       // Declara 2 punteros asignandole a *pj la
                               // la referencia de i
+
      *pj = j + 5;             // A *pj le asigna 25 + 5
+
      i = *pj + 5;             // A i le asigna 30 + 5
+
      pi = pj;                 // pi posee el valor de pj
+
      *pi = i + j;             // El puntero de pi guarda 35 + 25
 
      printf("Valor de &i: %p \n", &i);
      printf("Valor de &j: %p \n", &j);
+
      printf("Valor de pj: %i \n", pj);
      printf("Valor de *pj: %i \n", *pj);
+
      printf("Valor de i: %i \n", i);
+
      printf("Valor de pi: %i \n", pi);
      printf("Valor de *pi: %i \n", *pi);
+
      printf("Valor de (*pi+2): %i \n", (*pi+2));
-
-
 
      return 0;
 }
