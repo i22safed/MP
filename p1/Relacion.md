@@ -21,53 +21,53 @@ así como el valor inicial que  toman las variables en cada caso:
 Si el valor asignado a i empieza en la dirección F9C (hexadecimal) y el valor asignado a j empieza
 en FE9 entonces:     
 
-a) ¿Qué valor es representado por &i?
+	a) ¿Qué valor es representado por &i?
 
-  Representa el comienzo de la variable i
+	  Representa el comienzo de la variable i
 
-b) ¿Qué valor es representado por &j?
+	b) ¿Qué valor es representado por &j?
 
-  Representa el comienzo de la variable j
+	  Representa el comienzo de la variable j
 
-c) ¿Qué valor es asignado a pj?
+	c) ¿Qué valor es asignado a pj?
 
-  El valor asignado es uno aleatorio, que cambia en cada ejecución
-  del programa
+	  El valor asignado es uno aleatorio, que cambia en cada ejecución
+	  del programa
 
-d) ¿Qué valor es asignado a *pj?
+	d) ¿Qué valor es asignado a *pj?
 
-  Introduce mediante el operador de contenido la suma de i y j, es
-  decir, introduce el valor 60
+	  Introduce mediante el operador de contenido la suma de i y j, es
+	  decir, introduce el valor 60
 
-e) ¿Qué valor es asignado a i?
+	e) ¿Qué valor es asignado a i?
 
-  A la variable i se le asigna el contenido de pj + 5
+	  A la variable i se le asigna el contenido de pj + 5
 
-f) ¿Qué valor es representado por pi?
+	f) ¿Qué valor es representado por pi?
 
-  Valor asignado aleatorio ya que no ha sido inicializado
+	  Valor asignado aleatorio ya que no ha sido inicializado
 
-g) ¿Qué valor es asignado a *pi?
+	g) ¿Qué valor es asignado a *pi?
 
-  Contenido de la direccion de pi
+	  Contenido de la direccion de pi
 
-h) ¿Qué valor es representado por la expresión (*pi + 2)?
+	h) ¿Qué valor es representado por la expresión (*pi + 2)?
 
-  El contenido de pi + 2
+	  El contenido de pi + 2
 
 
-  4.  Un programa de C contiene las siguientes sentencias
+ 4. Un programa de C contiene las siguientes sentencias
 
-       float a = 0.001;
-       float b = 0.003;
-       float c, *pa, *pb
-       pa = &a;
-       *pa = 2 * a;
-       pb = &b;
-       c = 3 * (*pb + *pa );
+	  float a = 0.001;
+	  float b = 0.003;
+	  float c, *pa, *pb
+	  pa = &a;
+	  *pa = 2 * a;
+	  pb = &b;
+	  c = 3 * (*pb + *pa );
 
-  Si el valor asignado a “a” empieza en la dirección 1130 (hexadecimal) y el valor asignado a “b”
-  empieza en 1134 y el valor asignado a “c” empieza en 1138, entonces:
+Si el valor asignado a “a” empieza en la dirección 1130 (hexadecimal) y el valor asignado a “b”
+empieza en 1134 y el valor asignado a “c” empieza en 1138, entonces:
 
        a) ¿Qué valor es representado por &a?
 

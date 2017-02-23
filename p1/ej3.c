@@ -67,12 +67,12 @@ int main (){
      printf("Valor de &i: %p \n", &i);
      printf("Valor de &j: %p \n", &j);
 
-     printf("Valor de pj: %i \n", pj);
+     printf("Valor de pj: %p \n", pj);
      printf("Valor de *pj: %i \n", *pj);
 
      printf("Valor de i: %i \n", i);
 
-     printf("Valor de pi: %i \n", pi);
+     printf("Valor de pi: %p \n", pi);
      printf("Valor de *pi: %i \n", *pi);
 
      printf("Valor de (*pi+2): %i \n", (*pi+2));
