@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #include <stdio.h>
 #include <string.h>
 
@@ -44,21 +44,3 @@ int es_sufijo(char * cadena, char * sufijo){
           return 0;
 
      }
-=======
-
-#include <string.h>
-#include <stdio.h>
-
-int main()
-{
-   char pre[10] = "pp";
-   char post[10] = "tt";
-   char cadena[100] = "ppholacomoandadstt";
-   char * c = cadena;
-   c += strlen(pre);
-   c[strlen(c) - strlen(post)] = '\0';
-   printf("%s\n",c);
-   return 0;
->>>>>>> ef7c9678b74262b858ad30af66aad1518210dd11
-
-}
