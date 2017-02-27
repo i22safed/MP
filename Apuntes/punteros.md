@@ -35,7 +35,7 @@ Siendo su representación gráfica esta:
 
 ![Declaración de punteros](decPunt.png)
 
-Se declara 
+Se declara
 
 - ```c```  como una variable de tipo caracter cuyo valor es 'a'  
 - ```ptri``` como una variable de tipo puntero que puede contener direcciones
@@ -60,32 +60,65 @@ pf = &c; // Dará error
 (normalmente 32 bits) independientemente del tipo de dato al que apunte (todos
 almacenan una dirección de memoria)  
 
-## 3. Operadores 
+## 3. Operadores
 
 ### Operadores de dirección: &<variable>
 
 - Devuelve la dirección de memoria donde empieza la variable <variable>
-- Se utiliza habitualmente para asignar valores a datos de tipo puntero. Como por ejemplo: int i, *ptri; ptri = &i; 
-    + i es una variable de tipo entero, por lo que la expresión &i es la dirección de memoria 
+- Se utiliza habitualmente para asignar valores a datos de tipo puntero. Como por ejemplo: int i, *ptri; ptri = &i;
+    + i es una variable de tipo entero, por lo que la expresión &i es la dirección de memoria
     + Se dice que ```ptri``` apunta o referencia a ```i```
 
 ### Operadores de contenido: *<puntero>
-- Devuelve el contenido del objeto referenciado por ```<puntero>``` 
-- Esta operación se usa para acceder al objeto referenciado o apuntado por el puntero. Por ejemplo char c, *ptrc; ptrc = &c; *ptrc='A' (equivale a c = 'A') 
-    + ptrc es un puntero a caracter que contiene la dirección de C, por tanto, la expresión *ptrc es el objeto apuntado por el puntero, es decir, c. 
+- Devuelve el contenido del objeto referenciado por ```<puntero>```
+- Esta operación se usa para acceder al objeto referenciado o apuntado por el puntero. Por ejemplo char c, *ptrc; ptrc = &c; *ptrc='A' (equivale a c = 'A')
+    + ptrc es un puntero a caracter que contiene la dirección de C, por tanto, la expresión *ptrc es el objeto apuntado por el puntero, es decir, c.
 
-## 4. Representación de punteros 
+## 4. Representación de punteros
 
-Utilizamos ```print``` para representarlos pero tenemos los siguientes tipos 
-    - %lu: vista como un entero largo 
+Utilizamos ```print``` para representarlos pero tenemos los siguientes tipos
+    - %lu: vista como un entero largo
     - %X: vista en hexadecimal mayusculas
-    - %p: vista en hexadecimal en minúsculas 
-    - %x: vista en hexadecimal en minúsculas 
+    - %p: vista en hexadecimal en minúsculas
+    - %x: vista en hexadecimal en minúsculas
 
-## 5. Punteros NULL y void 
+## 5. Punteros NULL y void
 
-- NULL 
-    + Puntero nulo. No apunta a ninguna parte en particular, no direcciona ningún dato válido en memoria 
-    + Proporciona un medio de conocer cuando una variable puntero no direcciona a un dato válido 
-    + Definida en stddef.h, stdio.h, stdlib.h y string.h. 
-    + Tambien se puede definir 
+- NULL
+    + Puntero nulo. No apunta a ninguna parte en particular, no direcciona ningún dato válido en memoria
+    + Proporciona un medio de conocer cuando una variable puntero no direcciona a un dato válido
+    + Definida en stddef.h, stdio.h, stdlib.h y string.h.
+    + Tambien se puede definir
+
+
+
+## *Trabajando con punteros en funciones ... paso de parametros por referencia y por valor
+
+     - Protoipos lo declaramos con *
+     - En el main lo declaramos con el tipo que le corresponda a la variable
+          - En la llamada dentro del main ponemos referencia (&)
+
+               - Tambien se puede dar el caso de que en el main declaremos el puntero
+               - En este caso en la llamada a la funcion iría sin &
+
+     - Definicion de la función lo ponemos con *
+          - dentro de la funcion trabajamos con la variable de manera normal
+
+Ejemplo practico
+
+
+     Prototipo
+
+          void minimo_referencia(int num1,int num2,int *min);
+
+     Main
+
+          Declaración
+               int min
+
+          Llamada
+               minimo_referencia(a, b, &min);
+
+     Definicion de la funcion
+
+          void minimo_referencia(int num1,int num2,int *min)

@@ -20,15 +20,14 @@ int main(){
   scanf("%d",&b);
 
   min = minimo(a, b);
-  printf("\nMinimo (%d,%d): %d", a,b);
+  printf("\nMinimo (%d,%d): %d", a,b,min);
 
-  minimo_referencia(a, b, min);
+  minimo_referencia(a, b, &min);
   printf("\nMinimo (%d,%d): %d", a,b, min);
 
   return 0;
 
 }
-
 
 /// Cuerpos de las funciones
 
@@ -49,7 +48,7 @@ void minimo_referencia(int num1,int num2,int *min){
 
   }else{
 
-      *min = num2;
+     *min = num2;
 
   }
 

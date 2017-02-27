@@ -65,11 +65,7 @@ int main (){
      pb = &b;
      c = 3 * (*pb + *pa );
 
-          printf("%p \n", &(*pa));
-          printf("%p \n", &(*pa));
-          printf("%p \n", &(*pa));
-          printf("%p \n", &(*pa));
-          printf("%p \n", &(*pa));
-
+     printf("%p \n", &(*pa));
+     
      return 0;
 }

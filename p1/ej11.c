@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 #include <stdio.h>
 #include <string.h>
 
@@ -44,3 +44,5 @@ int es_sufijo(char * cadena, char * sufijo){
           return 0;
 
      }
+
+}
