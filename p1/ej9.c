@@ -15,12 +15,18 @@ void gradoMaxMin();
 int main(){
 
      struct polinomio pol;
-     int terminos;
+     int terminos=0;
+
+     printf("Introduzca el numero de terminos del polinomio: ");
+     scanf("%d", &terminos);
 
      struct polinomio vector[terminos];
 
+     /*
      leerMonomio(&pol);
      imprimirMonomio(&pol);
+     */
+
 
      return 0;
 }
