@@ -6,27 +6,31 @@ punteros:
      · Imprima los datos del vector por pantalla (escribeVector)
      · Sume los elementos mayores que cero (sumaPositivos)
 
-
-     FUNCIONA SOLO PARA 2 ELEMENTOS , CORREGIR !!
-
 */
 
 #include <stdio.h>
 
 void leerVector(int nEle, double *vector);
 void escribeVector(int nEle, double *vector);
+void sumaPositivos(int nEle, double *vector, double *suma);
 
 int main(){
 
      int nEle;
-     double vector[nEle];
+     double suma=0;
 
      printf("Introduzca el numero de elementos del vector: ");
      scanf("%d", &nEle);
 
+     double vector[nEle];
+
      leerVector(nEle, vector);
 
      escribeVector(nEle, vector);
+
+     sumaPositivos(nEle, vector, &suma);
+
+     printf("Suma de todos los elemetos positivos del vecto → %lf\n", suma);
 
 
      return 0;
@@ -36,8 +40,6 @@ void leerVector(int nEle, double *vector){
 
      int i=0;
      double valor = 0;
-
-     printf("El numero de elementos es → %i",nEle);
 
      for(i=0;i<nEle;i++){
 
@@ -52,8 +54,6 @@ void escribeVector(int nEle, double *vector){
 
      int i=0;
      double aux = 0;
- 
-     printf("El numero de elementos es → %i",nEle);
 
      for(i=0;i<nEle;i++){
 
@@ -61,5 +61,22 @@ void escribeVector(int nEle, double *vector){
 
      }
 
+
+}
+
+void sumaPositivos(int nEle, double *vector, double *suma){
+
+     int i=0;
+     double aux=0;
+
+     for(i=0;i<nEle;i++){
+
+          aux=*(vector+i);
+
+          if(aux>=0){
+               *suma = *suma + aux;
+          }
+
+     }
 
 }
