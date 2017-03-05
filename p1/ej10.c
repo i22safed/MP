@@ -22,7 +22,7 @@ int main(){
      double vector[nEle];
 
      printf("Introduzca el numero de elementos del vector: ");
-     scanf("%i", &nEle);
+     scanf("%d", &nEle);
 
      leerVector(nEle, vector);
 
@@ -37,6 +37,8 @@ void leerVector(int nEle, double *vector){
      int i=0;
      double valor = 0;
 
+     printf("El numero de elementos es → %i",nEle);
+
      for(i=0;i<nEle;i++){
 
           printf("Introduce un numero para la pos. %i: ", i );
@@ -50,10 +52,13 @@ void escribeVector(int nEle, double *vector){
 
      int i=0;
      double aux = 0;
+ 
+     printf("El numero de elementos es → %i",nEle);
 
      for(i=0;i<nEle;i++){
 
-          printf("El valor del vector en la posicion %i es → %lf\n",i,(*vector+i));
+          printf("El valor del vector en la posicion %i es → %lf\n",i,(*(vector+i)));
+
      }
 
 
