@@ -5,27 +5,40 @@
 // CORREGIR LA FUNCION
 
 
-int es_sufijo(char * cadena, char * sufijo);
+int es_sufijo(char * cadena, char * suprefijo);
+int es_prefijo(char * cadena, char * suprefijo);
 
 int main (){
 
      char cadena[20];
-     char sufijo[4];
+     char suprefijo[4];
 
      printf("Introduce una cadena a comparar: ");
      scanf("%s", cadena);
-     printf("Introduce ahora el sufijo: ");
-     scanf("%s", sufijo);
+     printf("Introduce ahora el sufijo/prefijo: ");
+     scanf("%s", suprefijo);
 
-     int res=es_sufijo(cadena, sufijo);
+     int res=es_sufijo(cadena, suprefijo);
 
      if(res == 1 ){
 
-          printf("Hay coincidencia → %s es sufijo de %s\n", sufijo, cadena);
+          printf("Hay coincidencia → %s es sufijo de %s\n", suprefijo, cadena);
 
      }else{
 
-          printf("Hay coincidencia → %s no es sufijo de %s\n", sufijo, cadena);
+          printf("No hay coincidencia → %s no es sufijo de %s\n", suprefijo, cadena);
+
+     }
+
+     res=es_prefijo(cadena, suprefijo);
+
+     if(res == 1 ){
+
+          printf("Hay coincidencia → %s es prefijo de %s\n", suprefijo, cadena);
+
+     }else{
+
+          printf("No hay coincidencia → %s no es prefijo de %s\n", suprefijo, cadena);
 
      }
 
@@ -34,14 +47,14 @@ int main (){
 }
 
 
-int es_sufijo(char * cadena, char * sufijo){
+int es_sufijo(char * cadena, char * suprefijo){
 
 
      int i=0;
 
      // Declaramos un aux para guardar el final de la cadena
 
-     char aux[strlen(sufijo)];
+     char aux[strlen(suprefijo)];
 
      // Declaramos el final de la cadena
 
@@ -49,18 +62,47 @@ int es_sufijo(char * cadena, char * sufijo){
 
      // Contador para la cadena
 
-     int j=final-strlen(sufijo);
+     int j=final-strlen(suprefijo);
 
      // Guardamos en aux el comienzo de final menos la longuitud del sufijo
 
-     for(i=0;i<strlen(sufijo);i++){
+     for(i=0;i<strlen(suprefijo);i++){
 
           aux[i]=cadena[j];
           j++;
 
      }
 
-     if(strstr(aux,sufijo)!=NULL){
+     if(strstr(aux,suprefijo)!=NULL){
+
+          return 1;
+
+     }else{
+
+          return 0;
+     }
+
+
+}
+
+int es_prefijo(char * cadena, char * suprefijo){
+
+
+     int i=0;
+
+     // Declaramos un aux para guardar el final de la cadena
+
+     char aux[strlen(suprefijo)];
+
+     // Guardamos en aux el comienzo de final menos la longuitud del sufijo
+
+     for(i=0;i<strlen(suprefijo);i++){
+
+          aux[i]=cadena[i];
+
+     }
+
+     if(strstr(aux,suprefijo)!=NULL){
 
           return 1;
 
