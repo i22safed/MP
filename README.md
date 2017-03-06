@@ -12,3 +12,5 @@ Repositorio para las practicas de Metodología de la Programación
 [![Progreso](https://img.shields.io/badge/Ejercicios-12-red.svg)]()
 
 ## Practica 2. 
+
+[![Progreso](https://img.shields.io/badge/Ejercicios----lightgrey.svg)]()
