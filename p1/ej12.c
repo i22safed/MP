@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>      // Para rand()
+#include <time.h>        // Para time()
 
 /*
 
@@ -22,15 +24,115 @@ imprimirVector, crearndiceImpares, crearIndicesPotencias, imprimeIndice.
 
 */
 
+void rellenaVectorAleatorio(int nEle,int * rango,int * vector);
+void imprimeVector(int nEle, int * vector);
+void crearIndiceImpares(int nEle, int * vector, int * vectorImpares);
+void crearIndicesPotencias(int nEle, int * vector, int * vectorPotencias);
 
 int main (){
 
+     int rango[1], nEle;
+     srand(time(NULL));
 
 
 
+     // Pedimos numero de elementos del vector
+     printf("Introduzca el numero de elementos del vector: ");
+     scanf("%i", &nEle);
+
+     int vector[nEle];
+     int vectorImpares[nEle];
+     int vectorPotencias[nEle];
+
+     // Pedimos rango
+     printf("Introduzca el rango minimo: ");
+     scanf("%i",&rango[0]);
+     printf("Introduzca el rango maximo: ");
+     scanf("%i",&rango[1]);
 
 
+     // Rellenamos vector de numeros aleatorios
+     rellenaVectorAleatorio(nEle,rango,vector);
+
+     // Imprimimos el vector
+     imprimeVector(nEle,vector);
+
+     crearIndiceImpares(nEle, vector, vectorImpares);
 
 
      return 0;
+}
+
+
+void rellenaVectorAleatorio(int nEle,int * rango,int * vector){
+
+     int i=0;
+     int nAle=0;
+
+     for(i=0; i<nEle; i++){
+
+          nAle = rand () % (rango[1]-rango[0]+1) + rango[0];
+          vector[i] = nAle;
+
+     }
+
+}
+
+void imprimeVector(int nEle, int * vector){
+
+     int i=0;
+
+     printf("\nLos elementos del vector son → ");
+     for(i=0; i<nEle; i++){
+
+          printf("%i ", vector[i]);
+
+     }
+
+     printf("\n\n");
+
+}
+
+void crearIndiceImpares(int nEle, int * vector, int * vectorImpares){
+
+     int i=0,j=0;
+
+     for(i=0; i<nEle; i++){
+
+          if((vector[i]%2)!=0){
+               vectorImpares[j]=i;
+               j++;
+          }
+
+     }
+
+}
+void crearIndicesPotencias(int nEle, int * vector, int * vectorPotencias){
+
+     int i=0 , j=0;
+
+     for(i=0; i<nEle; i++){
+
+          if((vector[i]%3)==0){
+
+               vectorPotencias[j]=i;
+               j++;
+
+          }
+     }
+}
+
+void imprimeIndice(int nEle, int * vector, int * vectorImpares, int * vectorPotencias){
+
+     int i=0;
+
+     for(i=0;i<nEle;i++){
+
+          if(vector[]){
+
+
+          }
+
+     }
+
 }
