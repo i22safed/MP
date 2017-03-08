@@ -11,6 +11,6 @@ Repositorio para las practicas de Metodología de la Programación
 [![Progreso](https://img.shields.io/badge/Ejercicios-1--11-brightgreen.svg)]()
 [![Progreso](https://img.shields.io/badge/Ejercicios-12-red.svg)]()
 
-## Practica 2. 
+## Practica 2. Reserva y Gestión de Memoria
 
 [![Progreso](https://img.shields.io/badge/Ejercicios----lightgrey.svg)]()
