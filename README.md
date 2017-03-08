@@ -8,8 +8,8 @@ Repositorio para las practicas de Metodología de la Programación
   · Paso de parametros por referencia  
   · Punteros y arrays  
 
-[![Progreso](https://img.shields.io/badge/Ejercicios-1--11-brightgreen.svg)]()
-[![Progreso](https://img.shields.io/badge/Ejercicios-12-red.svg)]()
+[![Progreso](https://img.shields.io/badge/Ejercicios-1--12-brightgreen.svg)]()
+
 
 ## Practica 2. Reserva y Gestión de Memoria
 
