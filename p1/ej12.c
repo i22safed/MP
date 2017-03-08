@@ -28,6 +28,8 @@ void rellenaVectorAleatorio(int nEle,int * rango,int * vector);
 void imprimeVector(int nEle, int * vector);
 void crearIndiceImpares(int nEle, int * vector, int * vectorImpares);
 void crearIndicesPotencias(int nEle, int * vector, int * vectorPotencias);
+void imprimeIndice(int nEle, int * vector, int * vectorImpares, int * vectorPotencias);
+
 
 int main (){
 
@@ -57,8 +59,14 @@ int main (){
      // Imprimimos el vector
      imprimeVector(nEle,vector);
 
+     // Creamos los indices de los impares
      crearIndiceImpares(nEle, vector, vectorImpares);
 
+     // Creamos los indices de las potencias
+     crearIndicesPotencias(nEle,vector,vectorPotencias);
+
+     // Imprimimos las potencias 
+     imprimeIndice(nEle,vector,vectorImpares,vectorPotencias);
 
      return 0;
 }
@@ -126,13 +134,25 @@ void imprimeIndice(int nEle, int * vector, int * vectorImpares, int * vectorPote
 
      int i=0;
 
+     printf("\nLos elementos impares del vector → ");
+
      for(i=0;i<nEle;i++){
 
-          if(vector[]){
-
-
-          }
+      
+          printf("%i ",vector[vectorImpares[i]]);
+          
 
      }
+
+     printf("\nLos elementos potencias de 3 del vector → ");
+
+     for(i=0;i<nEle;i++){
+
+      
+          printf("%i ",vector[vectorPotencias[i]]);
+          
+
+     }
+
 
 }
