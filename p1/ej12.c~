@@ -146,7 +146,6 @@ void imprimeIndice(int nEle, int * vector, int * vectorImpares, int * vectorPote
      ESTA IMPRIENDO INDICES QUE MARCAN VECTORIMPARES/POTENCIA QUE NO EXISTEN EN 
      EL VECTOR ORIGINAL
      
-     
 */
      }
 
