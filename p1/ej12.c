@@ -65,7 +65,7 @@ int main (){
      // Creamos los indices de las potencias
      crearIndicesPotencias(nEle,vector,vectorPotencias);
 
-     // Imprimimos las potencias 
+     // Imprimimos las potencias
      imprimeIndice(nEle,vector,vectorImpares,vectorPotencias);
 
      return 0;
@@ -108,7 +108,7 @@ void crearIndiceImpares(int nEle, int * vector, int * vectorImpares){
      for(i=0; i<nEle; i++){
 
           if((vector[i]%2)!=0){
-               vectorImpares[j]=i;
+               vectorImpares[j]=i;           // Meter &V[i]
                j++;
           }
 
@@ -123,7 +123,7 @@ void crearIndicesPotencias(int nEle, int * vector, int * vectorPotencias){
 
           if((vector[i]%3)==0){
 
-               vectorPotencias[j]=i;
+               vectorPotencias[j]=i;         // Meter &V[i]
                j++;
 
           }
@@ -138,15 +138,15 @@ void imprimeIndice(int nEle, int * vector, int * vectorImpares, int * vectorPote
 
      for(i=0;i<nEle;i++){
 
-      
-          printf("%i ",vector[i]);
-          
+
+          printf("%i ",vector[i]);      // Y lo que imprimimos *vectorImpares[j]
+
 /*
 
-     ESTA IMPRIENDO INDICES QUE MARCAN VECTORIMPARES/POTENCIA QUE NO EXISTEN EN 
+     ESTA IMPRIENDO INDICES QUE MARCAN VECTORIMPARES/POTENCIA QUE NO EXISTEN EN
      EL VECTOR ORIGINAL
-     
-     
+
+
 */
      }
 
@@ -154,9 +154,9 @@ void imprimeIndice(int nEle, int * vector, int * vectorImpares, int * vectorPote
 
      for(i=0;i<nEle;i++){
 
-      
-          printf("%i ",vector[i]);
-          
+
+          printf("%i ",vector[i]);      // Y lo que imprimimos *vectorPotencias[j]
+
 
      }
 
