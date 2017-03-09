@@ -1,0 +1,27 @@
+# Fichero: makefil5.v3 (Version 5 de "makefile.v3")
+# Ejemplo de makefile que genera un ejecutable a partir de tres ficheros objeto. 
+#   1) "ppal.o": codigo objeto del programa principal (de "ppal.c").  
+#   2) "vec_ES.o": codigo objeto de las funciones de E/S del vector (de "vec_ES.c"). 
+#   3) "ordena.o": codigo objeto de la funcion de ordenacion (de "ordena.c"). 
+#
+# Novedad: uso reglas implicitas. 
+#
+# En este ejemplo, al no existir reglas explicitas que digan como generar los 
+# ficheros .o a partir de los ficheros .c, se aplica la regla implicita: 
+#          $(CC) -c $(CPPFLAGS) $(CFLAGS)
+# para cada uno de ellos.
+
+CC = gcc
+#CPPFLAGS =
+CFLAGS = -I$(INCLUDE)
+
+FUENTES = ppal.c vec_ES.c ordena.c 
+OBJETOS = $(FUENTES:.c=.o)
+EXE     = ordena35.exe 
+INCLUDE = ./include
+
+$(EXE): $(OBJETOS)
+	gcc -o $(EXE) $(OBJETOS) 
+ppal.o : $(INCLUDE)/vec_ES.h $(INCLUDE)/ordena.h
+ordena.o: $(INCLUDE)/ordena.h
+vec_ES.o: $(INCLUDE)/vec_ES.h

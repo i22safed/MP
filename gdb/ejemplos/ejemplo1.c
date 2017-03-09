@@ -1,7 +1,7 @@
 /* --------------------------------------
-   Metodología de la Programacion   
+   Metodología de la Programacion
    Ejemplo para usar el depurador gdb
-      Se nos olvida un & en el scanf   
+      Se nos olvida un & en el scanf
    -------------------------------------*/
 
 #include <stdio.h>
@@ -14,10 +14,10 @@ int main(){
    int i,j;
 
    printf("Introduce el nº de filas: ");
-   scanf("%d",nfil);
+   scanf("%d",&nfil);
 
    printf("Introduce el nº de columnas: ");
-   scanf("%d",ncol);   
+   scanf("%d",&ncol);   
 
    for (i=0;i<nfil;i++){
       for (j=0;j<ncol;j++){
@@ -25,6 +25,6 @@ int main(){
          scanf("%d",&matriz[i][j]);
       }
    }
-   
+
    return 0;
 }

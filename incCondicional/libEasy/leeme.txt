@@ -1,0 +1,26 @@
+//--------------------------------------
+//Descripción del contenido del ejemplo
+//--------------------------------------
+
+
+"ej1" contiene un ejemplo de creación de biblioteca con un único módulo .o.
+"ej2" contiene un ejemplo de creación de biblioteca con varios módulos .o.
+
+Ambos ejemplos contienen un fichero .bat (se puede editar con cualquier editor de textos)
+que:
+1. Compila todos los .c para generar los .o
+2. Genera la biblioteca a partir del/los .o
+3. Genera el ejecutable a partir del .o con la función main y la biblioteca (.a)
+
+
+
+Ambas bibliotecas contienen las mismas funciones.
+La función main es la misma en ambos ejemplos
+Se puede observar como la estructura de módulos de la biblioteca influye
+en el tamaño del fichero ejecutable final:
+  *En "ej1": 78,6 KB (80.546 bytes)
+  *En "ej2": 78,5 KB (80.451 bytes)
+
+=>El tamaño del ejecutable es menor en el segundo ejemplo (varios .o en la biblioteca).
+
+NOTA: Los tamaños de los ejecutables pueden variar entre sistemas operativos

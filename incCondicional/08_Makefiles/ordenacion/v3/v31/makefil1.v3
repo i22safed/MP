@@ -1,0 +1,22 @@
+# Fichero: makefil1.v3
+# Ejemplo de makefile que genera un ejecutable a partir de 
+# una biblioteca. 
+
+destinos: ordena.exe clean 
+ordena.exe : ppal.o libreria.a
+	gcc -o ordena.exe ppal.o libreria.a
+	rename ordena.exe ordena31.exe
+ppal.o : ppal.c vec_ES.h ordena.h
+	gcc -c -o ppal.o -I. ppal.c 
+vec_ES.o : vec_ES.c vec_ES.h
+	gcc -c -o vec_ES.o -I. vec_ES.c
+ordena.o : ordena.c ordena.h
+	gcc -c -o ordena.o -I. ordena.c
+libreria.a: ordena.o vec_ES.o
+	ar -rsv libreria.a ordena.o vec_ES.o
+clean :
+	del ppal.o
+	del vec_ES.o
+	del ordena.o
+	del libreria.a
+	

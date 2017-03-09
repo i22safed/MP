@@ -1,0 +1,32 @@
+# Fichero: makefil3.v3 (Version 3 de "makefile.v3")
+# Ejemplo de makefile que genera un ejecutable a partir de tres ficheros objeto. 
+#   1) "ppal.o": codigo objeto del programa principal (de "ppal.c").  
+#   2) "vec_ES.o": codigo objeto de las funciones de E/S del vector (de "vec_ES.c"). 
+#   3) "ordena.o": codigo objeto de la funcion de ordenacion (de "ordena.c"). 
+# Utiliza las macros OBJ e INCLUDE (version 2).
+# Novedad: uso de macros con sustitucion. 
+
+OBJ  = vec_ES.o ordena.o 
+INCLUDE = .
+MAIN = ppal.o
+EXE  = ordena33.exe 
+VES  = vec_ES
+
+destinos: $(EXE) clean
+
+$(EXE): $(MAIN) $(OBJ) 
+	gcc $(MAIN) $(OBJ) -o $(EXE)
+
+$(MAIN): $(MAIN:.o=.c) $(VES).h $(VES:vec_ES=ordena).h  
+	gcc -c -o $(MAIN) -I$(INCLUDE) $(MAIN:.o=.c) 
+
+$(VES).o: $(VES).c $(VES).h
+	gcc -c -o $(VES).o -I$(INCLUDE) $(VES).c  
+
+$(VES:vec_ES=ordena).o: $(VES:vec_ES=ordena).c $(VES:vec_ES=ordena).h
+	gcc -c -o $(VES:vec_ES=ordena).o -I$(INCLUDE) $(VES:vec_ES=ordena).c 
+
+clean :
+	del ppal.o
+	del vec_ES.o
+	del ordena.o	
