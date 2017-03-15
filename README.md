@@ -11,9 +11,9 @@ Repositorio para las practicas de Metodología de la Programación
 [![Progreso](https://img.shields.io/badge/Ejercicios-1--12-brightgreen.svg)]()
 
 
-## Practica 2. Reserva y Gestión de Memoria
+## Practica 2. Reserva y Gestión de Memoria  
 
-  · Memoria dinámica 
+  · Memoria dinámica  
   · Bibliotecas y Doxygen  
 
 [![Progreso](https://img.shields.io/badge/Ejercicios----lightgrey.svg)]()
