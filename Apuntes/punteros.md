@@ -1,4 +1,4 @@
-# Punteros
+#### Punteros
 
 Cuando declaramos una variable, asociamos 3 atributos con la misma
 
@@ -11,7 +11,7 @@ manera
 
 ![Punteros](rep.png)
 
-## 1. Tipo de dato puntero
+##### 1. Tipo de dato puntero
 
 No es mas que un tipo de dato que contiene la dirección de memoria de un dato
 
@@ -43,7 +43,7 @@ de memoria de objetos de tipo ```int```
 - ```ptrc``` como una variable puntero que puede contener direcciones de memoria
 de objetos de tipo char  
 
-## 2. Punteros y verificación de tipos  
+##### 2. Punteros y verificación de tipos  
 
 - Los punteros se enlazan a tipos de datos especificos, de modo que C verificará
 si se asigna la dirección de un tipo de dato al tipo correcto de puntero.  
@@ -60,21 +60,21 @@ pf = &c; // Dará error
 (normalmente 32 bits) independientemente del tipo de dato al que apunte (todos
 almacenan una dirección de memoria)  
 
-## 3. Operadores
+##### 3. Operadores
 
-### Operadores de dirección: &<variable>
+###### Operadores de dirección: &<variable>
 
 - Devuelve la dirección de memoria donde empieza la variable <variable>
 - Se utiliza habitualmente para asignar valores a datos de tipo puntero. Como por ejemplo: int i, *ptri; ptri = &i;
     + i es una variable de tipo entero, por lo que la expresión &i es la dirección de memoria
     + Se dice que ```ptri``` apunta o referencia a ```i```
 
-### Operadores de contenido: *<puntero>
+###### Operadores de contenido: *<puntero>
 - Devuelve el contenido del objeto referenciado por ```<puntero>```
 - Esta operación se usa para acceder al objeto referenciado o apuntado por el puntero. Por ejemplo char c, *ptrc; ptrc = &c; *ptrc='A' (equivale a c = 'A')
     + ptrc es un puntero a caracter que contiene la dirección de C, por tanto, la expresión *ptrc es el objeto apuntado por el puntero, es decir, c.
 
-## 4. Representación de punteros
+#### 4. Representación de punteros
 
 Utilizamos ```print``` para representarlos pero tenemos los siguientes tipos
     - %lu: vista como un entero largo
@@ -82,7 +82,7 @@ Utilizamos ```print``` para representarlos pero tenemos los siguientes tipos
     - %p: vista en hexadecimal en minúsculas
     - %x: vista en hexadecimal en minúsculas
 
-## 5. Punteros NULL y void
+#### 5. Punteros NULL y void
 
 - NULL
     + Puntero nulo. No apunta a ninguna parte en particular, no direcciona ningún dato válido en memoria
@@ -92,7 +92,7 @@ Utilizamos ```print``` para representarlos pero tenemos los siguientes tipos
 
 
 
-## *Trabajando con punteros en funciones ... paso de parametros por referencia y por valor
+###### *Trabajando con punteros en funciones ... paso de parametros por referencia y por valor
 
      - Protoipos lo declaramos con *
      - En el main lo declaramos con el tipo que le corresponda a la variable
