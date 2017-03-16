@@ -7,14 +7,21 @@
 siguientes valores. { {1.1, 1.2, 1.3}, {2.1.,2.2, 2.3}}
 
      · ¿Cual es el significado de tabla?
+          La matriz
      · ¿Cual es el significado de (tabla+1)?
+          Direccion tabla[1]
      · ¿Cual es el significado de *(tabla+1)?
+          El objeto al que referencia
      · ¿Cual es el significado de (*(tabla+1)+1)?
+          Tabla [1][1]
      · ¿Cual es el significado de (*(tabla)+1)?
+          Tabla[0][1]
      · ¿Cual es el valor de *(*(tabla+1)+1)?
+          Elemento[1][1]
      · ¿Cual es el valor de *(*(tabla)+1)?
+          Elemento[0][1]
      · ¿Cual es el valor de *(*(tabla+1))?
-
+          Elemento[1][0]
 */
 
 
@@ -22,7 +29,7 @@ int main(){
 
      float tabla[2][3]={{1.1,1.2,1.3},{2.1,2.2,2.3}};
 
-     printf("El valor de tabla es → %p ", tabla);
+     printf("\nEl valor de tabla es → %p \n", tabla);
 
      printf("\n¿Cual es el significado de tabla?\n");
      printf("Es una matriz bidimensional de 2x3 expresada con aritmetica de punteros\n\n");
@@ -47,6 +54,8 @@ int main(){
 
      printf("¿Cual es el valor de *(*(tabla+1))?\n");
      printf("El valor de *(*(tabla+1)) es (pos [1][0]) → %f\n\n", *(*(tabla+1)));
+
+
 
 
 
