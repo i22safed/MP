@@ -5,7 +5,7 @@
 void reservarMemoriaVector(int nEle, int ** vector);
 void rellenarVector(int nEle, int * vector);
 //void imprimeVector(int nEle, int * vector);
-void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor);
+void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor, int * mayores, int * menores);
 
 // Pasados por referencia
 
@@ -31,9 +31,13 @@ int main (){
 
      // Funciones de obtencion del numero de mayores y menores y sus respectivas
      // funciones de reserva
-     mayorMenorVector(nEle,num,vector,&mayor,&menor);
-     reservarMemoriaVector(mayor,&mayores);  // Reserva para los elemetos mayores
-     reservarMemoriaVector(menor,&menores);  // Reserva para los elemetos menores
+     mayorMenorVector(nEle,num,vector,&mayor,&menor,mayores,menores);
+
+     // Imprimimos el vector original
+     
+     // Imprimimos los vectores menores y mayores
+
+
 
 
 
@@ -65,9 +69,11 @@ void rellenarVector(int nEle, int * vector){
      }
 }
 
-void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor){
+void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor, int * mayores, int * menores){
 
-     int i=0;
+     int i=0,j=0,k=0;
+
+     // Obtenemos primeramente el numero de mayores y menores para la reserva
 
      for(i=0;i<nEle;i++){
 
@@ -78,7 +84,32 @@ void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor)
 
      *mayor = nEle - *menor;
 
+     // Reservamos memoria para los vectores de mayor y menor
+
+     reservarMemoriaVector(*mayor,&mayores);
+     reservarMemoriaVector(*menor,&menores);
+
+     for(i=0;i<nEle;i++){
+
+          if(*(vector+i) < num ){
+
+               *(menor+j) = num;
+               j++;
+
+          }else{
+
+               *(mayor+k)=num;
+               k++;
+
+          }
+     }
+
+
+
 }
+
+
+
 
 /*
 void imprimeVector(int nEle, int * vector){
