@@ -4,7 +4,7 @@
 
 void reservarMemoriaVector(int nEle, int ** vector);
 void rellenarVector(int nEle, int * vector);
-//void imprimeVector(int nEle, int * vector);
+void imprimeVector(int nEle, int * vector);
 void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor, int * mayores, int * menores);
 
 // Pasados por referencia
@@ -34,10 +34,9 @@ int main (){
      mayorMenorVector(nEle,num,vector,&mayor,&menor,mayores,menores);
 
      // Imprimimos el vector original
-     
-     // Imprimimos los vectores menores y mayores
-
-
+     printf("El numero de elementos son → %i ", nEle );
+     printf("Los elemetos del vector original son → ");
+     imprimeVector(nEle,vector);
 
 
 
@@ -93,25 +92,20 @@ void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor,
 
           if(*(vector+i) < num ){
 
-               *(menor+j) = num;
+               *(menores+j) = *(vector+i) ;
                j++;
 
           }else{
 
-               *(mayor+k)=num;
+               *(mayores+k) = *(vector+i);
                k++;
 
           }
      }
 
-
-
 }
 
 
-
-
-/*
 void imprimeVector(int nEle, int * vector){
 
      int i=0;
@@ -120,11 +114,10 @@ void imprimeVector(int nEle, int * vector){
 
      for(i=0;i<nEle;i++){
 
-          printf("%i ", *(vector+i));
+          printf("%i ", vector[i]);
 
      }
 
      printf("\n");
 
 }
-*/
