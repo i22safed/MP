@@ -2,122 +2,147 @@
 #include <stdlib.h>
 
 
-void reservarMemoriaVector(int nEle, int ** vector);
-void rellenarVector(int nEle, int * vector);
+int * reservaVector(int nEle);
+void rellenaVector(int nEle, int * vector,int num, int * mayor, int *menor);
+void mayorMenorVector(int nEle, int * vector,int *mayores, int *menores, int num);
 void imprimeVector(int nEle, int * vector);
-void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor, int * mayores, int * menores);
-
-// Pasados por referencia
-
 
 int main (){
 
-     // Declaraciones de varibales
-     int nEle = 0, num=0;
-     int * vector = NULL, * mayores = NULL, * menores = NULL;
-     int mayor, menor;
+	// Declaramos las variables necesarias 
 
-     // Entrada de los datos iniciales
-     printf("Introduzca el numero de elementos del vector → ");
-     scanf("%i", &nEle);
-     printf("Introduzca un numero → ");
-     scanf("%i",&num);
+	int nEle=0, num=0;
+	int * vector,* menores,* mayores; 
+	int menor=0, mayor=0;
 
-     // Funciones de reserva y E/S
-     reservarMemoriaVector(nEle, &vector);
-     rellenarVector(nEle, vector);
-     // imprimeVector(nEle, vector);
+	// Pedimos el numero de elementos del vector 
 
+	printf("\nIntroduzca el numero de elemetos del vector: ");
+	scanf("%i", &nEle);
 
-     // Funciones de obtencion del numero de mayores y menores y sus respectivas
-     // funciones de reserva
-     mayorMenorVector(nEle,num,vector,&mayor,&menor,mayores,menores);
+	// A continuación reservamos memoria para el vector
 
-     // Imprimimos el vector original
-     printf("El numero de elementos son → %i ", nEle );
-     printf("Los elemetos del vector original son → ");
-     imprimeVector(nEle,vector);
+	vector = reservaVector(nEle);
 
+	// Ahora pedimos el numero para separar en mayor y menor 
 
+	printf("\n\nIntroduzca el numero para hallar los mayores/menores: ");
+	scanf("%i", &num); 
 
-     return 0;
+	// Rellenamos el vector con valores y determinamos cuantos valores menores y mayores
+	// que num hay 
+
+	rellenaVector(nEle,vector,num,&mayor,&menor);
+
+	// Reservamos memoria para los vectores de mayores y menores	
+
+	menores=reservaVector(menor);
+	mayores=reservaVector(mayor);
+
+	// Metemos en cada uno de los vectores reservados los elementos correspondientes
+
+	mayorMenorVector(nEle,vector,mayores,menores,num);
+
+	// Imprimimos cada uno de los vectores de elemetos 
+
+	printf("\n\nLos valores del vector original son: ",num);
+	imprimeVector(nEle,vector);
+	printf("\n\nLos valores menores que %i son: ",num);
+	imprimeVector(menor,menores);
+	printf("\nLos valores mayores o iguales que %i son: ",num);
+	imprimeVector(mayor,mayores);
+
+	// Liberamos memoria para cada uno de los vectores reservados y ponemos los 
+	// respectivos punteros a NULL
+
+	free(vector);
+	vector = NULL; 
+	free(mayores);
+	mayores = NULL; 
+	free(menores);
+	menores = NULL; 
+
+	return 0; 
 }
 
 
-void reservarMemoriaVector(int nEle, int ** vector){      // Reserva por ref
 
-     if((*vector=(int *)calloc(nEle, sizeof(int)))==NULL){
 
-          printf("\nNo ha sido posible la reserva de memoria\n");
-          exit (-1);
 
-     }
+int * reservaVector(int nEle){					// No utilizamos referencia
 
-     printf("\nReserva de memoria realizada correctamente\n");
+	int * v; 
 
-}
+	if((v=(int*)calloc(nEle,sizeof(int)))==NULL){
 
-void rellenarVector(int nEle, int * vector){
+		printf("\nError en la reserva de memoria\n");
+		exit(-1);
 
-     int i=0;
+	}else{
 
-     for(i=0;i<nEle;i++){
+		printf("\nLa reserva para %i elementos se ha realizado correctamente", nEle);
+	}
 
-          printf("\nIntroduzca un elemento para la pos. %d → ",i);
-          scanf("%i", (vector+i));
-     }
-}
-
-void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor, int * mayores, int * menores){
-
-     int i=0,j=0,k=0;
-
-     // Obtenemos primeramente el numero de mayores y menores para la reserva
-
-     for(i=0;i<nEle;i++){
-
-          if(*(vector+i) < num ){
-               *menor = *menor + 1;
-          }
-     }
-
-     *mayor = nEle - *menor;
-
-     // Reservamos memoria para los vectores de mayor y menor
-
-     reservarMemoriaVector(*mayor,&mayores);
-     reservarMemoriaVector(*menor,&menores);
-
-     for(i=0;i<nEle;i++){
-
-          if(*(vector+i) < num ){
-
-               *(menores+j) = *(vector+i) ;
-               j++;
-
-          }else{
-
-               *(mayores+k) = *(vector+i);
-               k++;
-
-          }
-     }
+	return (v);
 
 }
 
 
-void imprimeVector(int nEle, int * vector){
 
-     int i=0;
 
-     printf("Los elemetos del vector son → ");
+void rellenaVector(int nEle, int * vector,int num, int *mayor, int *menor){
 
-     for(i=0;i<nEle;i++){
+	int i=0; 
 
-          printf("%i ", vector[i]);
+	// Bucle para rellenar el vector
 
-     }
+	for(i=0;i<nEle;i++){
 
-     printf("\n");
+		printf("\nIntroduzca un valor para la pos. %i del vector: ",i);
+		scanf("%i",(vector+i));
 
+	}
+	
+	// Comprobamos la cantidad de numeros mayores y menores que num hay 
+
+	for(i=0;i<nEle;i++){
+
+		if(*(vector+i)<num){
+			*menor = *menor + 1;
+		}else{
+			*mayor = *mayor + 1;
+		}	
+	}
+}
+
+void mayorMenorVector(int nEle, int * vector,int *mayores, int *menores, int num){
+
+	int i=0,j=0,k=0; 
+
+	for(i=0;i<nEle;i++){
+		
+		if(*(vector+i)<num){
+
+			*(menores+j) = *(vector+i); 
+			j++;
+
+		}else{
+
+			*(mayores+k) = *(vector+i); 
+			k++;
+		}
+	}
+
+}
+
+void imprimeVector(int nEle, int *vector){
+
+	int i=0; 
+
+	for(i=0;i<nEle;i++){
+
+		printf(" %i", *(vector+i));
+
+	}
+	printf("\n");
 }
