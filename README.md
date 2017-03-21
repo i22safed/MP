@@ -16,6 +16,6 @@ Repositorio para las practicas de Metodología de la Programación
   · Memoria dinámica  
   · Bibliotecas y Doxygen 
   
-[![Progreso](https://img.shields.io/badge/Ejercicios-1-brightgreen.svg)]() 
-[![Progreso](https://img.shields.io/badge/Ejercicios-2--7-red.svg)]()
+[![Progreso](https://img.shields.io/badge/Ejercicios-1%2C2%2C4-brightgreen.svg)]() 
+[![Progreso](https://img.shields.io/badge/Ejercicios-3%2C5--7-red.svg)]()
 
