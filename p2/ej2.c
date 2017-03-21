@@ -16,6 +16,7 @@ int main (){
      int nEle = 0, num=0;
      int * vector = NULL, * mayores = NULL, * menores = NULL;
      int mayor, menor;
+     int i=0;
 
      // Entrada de los datos iniciales
      printf("Introduzca el numero de elementos del vector → ");
@@ -34,9 +35,15 @@ int main (){
      mayorMenorVector(nEle,num,vector,&mayor,&menor,mayores,menores);
 
      // Imprimimos el vector original
-     printf("El numero de elementos son → %i ", nEle );
-     printf("Los elemetos del vector original son → ");
+     printf("\nLos elementos del vector original son → ");
      imprimeVector(nEle,vector);
+     // Imprimimos los elementos del vector de los menores
+     printf("\nLos elementos menores o iguales que %i son → ", num);
+     imprimeVector(menor,menores);
+
+     // Imprimimos los elementos del vector de los menores
+     printf("\nLos elementos mayores que %i son → ", num);
+     imprimeVector(mayor,mayores);
 
 
 
@@ -53,7 +60,7 @@ void reservarMemoriaVector(int nEle, int ** vector){      // Reserva por ref
 
      }
 
-     printf("\nReserva de memoria realizada correctamente\n");
+     printf("\nReserva de memoria para %i elementos \n", nEle);
 
 }
 
@@ -76,7 +83,7 @@ void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor,
 
      for(i=0;i<nEle;i++){
 
-          if(*(vector+i) < num ){
+          if(*(vector+i) <= num ){
                *menor = *menor + 1;
           }
      }
@@ -90,7 +97,7 @@ void mayorMenorVector(int nEle, int num, int * vector, int * mayor, int * menor,
 
      for(i=0;i<nEle;i++){
 
-          if(*(vector+i) < num ){
+          if(*(vector+i) <= num ){
 
                *(menores+j) = *(vector+i) ;
                j++;
@@ -110,11 +117,9 @@ void imprimeVector(int nEle, int * vector){
 
      int i=0;
 
-     printf("Los elemetos del vector son → ");
-
      for(i=0;i<nEle;i++){
 
-          printf("%i ", vector[i]);
+          printf("%i ", *(vector+i));
 
      }
 
