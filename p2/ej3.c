@@ -14,12 +14,13 @@ struct Ficha_Jugador * reservaVector(int nEle);
 struct Ficha_Jugador leerJugador();
 struct Ficha_Jugador * rellenaVectorJugadores(struct Ficha_Jugador * jugador, int nEle);
 void listarJugadores(struct Ficha_Jugador * jugador, int nEle);
-struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle);
+struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle,int * match);
 
 
 int main (){
 
 	int nEle=0, i=0;
+	int match=0;
 	struct Ficha_Jugador * jugador;
 
 	printf("\nIntroduzca el numero de jugadores para la reserva: ");
@@ -31,9 +32,9 @@ int main (){
 
 	listarJugadores(jugador,nEle);
 
-	jugador = borraJugadores(jugador,nEle);
+	jugador = borraJugadores(jugador,nEle,&match);
 
-	listarJugadores(jugador,nEle);
+	listarJugadores(jugador,(nEle-match));
 
 	return 0;
 }
@@ -103,22 +104,24 @@ void listarJugadores(struct Ficha_Jugador * jugador, int nEle){
 		printf("\nDatos del jugador %i",i);
 		printf("Nombre → %s",(jugador+i)->nombre);
 
+		// Añadir los demas campos dorsal y estatura
+
 	}
 
 
 }
 
-struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle){
+struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle,int * match){
 
 
-	int i=0,j=0,match=0;
+	int i=0,j=0;
 	char caracter[1]="a";
 
 	for(i=0;i<nEle;i++){	// Contabilizamos el numero de apariciones
 
 		if(strstr(((jugador+i)->nombre),caracter)==NULL){
 
-			match++;
+			*match = *match + 1;
 
 		}
 
@@ -126,17 +129,21 @@ struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle){
 
 	struct Ficha_Jugador aux[match];
 
-	for(i=0;i<nEle;i++){	// Contabilizamos el numero de apariciones
+	// Ponemos los que no llevan A los primeros, para despues hacer
+	// un realloc a nEle - match
+
+	for(i=0;i<nEle;i++){
 
 		if(strstr(((jugador+i)->nombre),caracter)==NULL){
 
-			jugador[i]=aux[j];
+			aux[j]=jugador[i];
 			j++;
-
 		}
-
 	}
 
-	return aux;
+
+
+
+	return jugador;
 
 }
