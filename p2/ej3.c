@@ -13,6 +13,8 @@ struct Ficha_Jugador{
 struct Ficha_Jugador * reservaVector(int nEle);
 struct Ficha_Jugador leerJugador();
 struct Ficha_Jugador * rellenaVectorJugadores(struct Ficha_Jugador * jugador, int nEle);
+void listarJugadores(struct Ficha_Jugador * jugador, int nEle);
+struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle);
 
 
 int main (){
@@ -27,6 +29,11 @@ int main (){
 	jugador = reservaVector(nEle);
 	jugador = rellenaVectorJugadores(jugador,nEle);
 
+	listarJugadores(jugador,nEle);
+
+	jugador = borraJugadores(jugador,nEle);
+
+	listarJugadores(jugador,nEle);
 
 	return 0;
 }
@@ -98,5 +105,38 @@ void listarJugadores(struct Ficha_Jugador * jugador, int nEle){
 
 	}
 
+
+}
+
+struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle){
+
+
+	int i=0,j=0,match=0;
+	char caracter[1]="a";
+
+	for(i=0;i<nEle;i++){	// Contabilizamos el numero de apariciones
+
+		if(strstr(((jugador+i)->nombre),caracter)==NULL){
+
+			match++;
+
+		}
+
+	}
+
+	struct Ficha_Jugador aux[match];
+
+	for(i=0;i<nEle;i++){	// Contabilizamos el numero de apariciones
+
+		if(strstr(((jugador+i)->nombre),caracter)==NULL){
+
+			jugador[i]=aux[j];
+			j++;
+
+		}
+
+	}
+
+	return aux;
 
 }
