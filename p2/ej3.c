@@ -121,10 +121,10 @@ void listarJugadores(struct Ficha_Jugador * jugador, int nEle){
 	for(i=0;i<nEle;i++){
 
 		printf("\nDatos del jugador %i",i);
-		printf("\nNombre → %s \n",(jugador+i)->nombre);
-		printf("\nDorsal → %i \n",(jugador+i)->dorsal);
-		printf("\nPeso → %f \n",(jugador+i)->peso);
-		printf("\nEstatura → %i \n",(jugador+i)->estatura);
+		printf("\n    Nombre → %s \n",(jugador+i)->nombre);
+		printf("\n    Dorsal → %i \n",(jugador+i)->dorsal);
+		printf("\n    Peso → %f Kg.\n",(jugador+i)->peso);
+		printf("\n    Estatura → %i cm.\n",(jugador+i)->estatura);
 
 	}
 
@@ -132,6 +132,8 @@ void listarJugadores(struct Ficha_Jugador * jugador, int nEle){
 }
 
 struct Ficha_Jugador * borraJugadores(struct Ficha_Jugador * jugador, int nEle, char * caracter, int * match){
+
+	// CAMBIAR FUNCION
 
 	int i=0,j=0;
 
