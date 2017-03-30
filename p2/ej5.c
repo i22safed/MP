@@ -19,8 +19,12 @@ necesarias.
 #include <stdlib.h>
 #include <string.h>
 
-char ** reservarMemoria(char * cadena, int * palabras);
-int calcularMedia(char ** vCad, int * palabras);
+char ** reservarMemoria(char * cadena, int * palabras, int * caracteres);
+void rellenaMatriz(char ** vCad,char * cadena, int palabras, int * caracteres);
+void imprimeMatriz(char ** vCad, int palabras, int * caracteres);
+float calcularMedia(int * caracteres, int palabras);
+int * vectorFrec(int * caracteres, int palabras);
+
 
 
 int main(){
@@ -30,26 +34,34 @@ int main(){
 
      char cadena[100];
      char ** vCad;
-     int media=0;
+     float media=0;
      int palabras=0;
+     int caracteres[10],i=0;
+     int * vFrec;
 
      // Declaramos una matriz que se asignará de manera irregular
 
      printf("Introduzca una frase → ");
      gets(cadena);
 
-     vCad = reservarMemoria(cadena,&palabras);
-     media = calcularMedia(vCad,&palabras);
+     vCad = reservarMemoria(cadena,&palabras,caracteres);
+
+     rellenaMatriz(vCad,cadena,palabras,caracteres);
+     imprimeMatriz(vCad,palabras,caracteres);
+     media = calcularMedia(caracteres,palabras);
+
+     printf("\nLa media es de la longuitud de las palabras es → %.2f letras\n",media);
+
+     vFrec = vectorFrec(caracteres,palabras);
 
      return 0;
 }
 
-char ** reservarMemoria(char * cadena, int * palabras){
+char ** reservarMemoria(char * cadena, int * palabras, int * caracteres){
 
      int i=0,j=0;
      int espacios=0;
      char ** tabla;
-     int caracteres[10];
 
      // Primeramente hallamos los espacios de la cadena para hallar en numero
      // de palabras
@@ -67,8 +79,11 @@ char ** reservarMemoria(char * cadena, int * palabras){
      *palabras = espacios + 1;
 
      for(i=0;i<*palabras;i++){
+
           caracteres[i]=0;
+
      }
+
 
      // Detectamos todos los parametros adicionales para la reserva de memoria
 
@@ -131,15 +146,76 @@ char ** reservarMemoria(char * cadena, int * palabras){
 
 }
 
-int calcularMedia(char ** vCad,int * palabras){
+void rellenaMatriz(char ** vCad,char * cadena, int palabras, int * caracteres){
 
-     float longitud=0;
+     int i=0,j=0,k=0;
+
+
+     for(i=0;i<palabras;i++){
+
+          for(j=0;j<caracteres[i];j++){
+
+               if(cadena[k]!=' '){
+
+                    vCad[i][j]=cadena[k];
+                    k++;
+
+               }else{
+
+                    k++;
+               }
+          }
+     }
+
+}
+
+void imprimeMatriz(char ** vCad, int palabras, int * caracteres){
+
+
+     int i=0,j=0;
+
+     for(i=0;i<palabras;i++){
+
+          for(j=0;j<caracteres[i];j++){
+
+               printf("%c",vCad[i][j]);
+          }
+
+          printf("\n");
+     }
+
+}
+
+float calcularMedia(int * caracteres, int palabras){
+
      int i=0;
-
-     printf("\nEl numero de palabras es → %i // %lu\n", *palabras,strlen(vCad[0]));
-
+     float med=0;
 
 
-     return 1;
+     for(i=0;i<palabras;i++){
 
+          med = med + caracteres[i];
+
+     }
+
+     return (med/palabras);
+
+}
+
+int * vectorFrec(int * caracteres, int palabras){
+
+     int i=0;
+     int * vFrec;
+
+     if((vFrec=(int *)malloc(palabras*sizeof(int)))==NULL){
+
+          printf("\nError no ha sido posible la reserva para %i elementos\n",palabras);
+
+     }else{
+
+          printf("\nLa reserva para %i elementos se ha realizado de manera correcta",palabras);
+     }
+
+
+     return vFrec;
 }
