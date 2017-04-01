@@ -2,18 +2,27 @@
 #include <stdlib.h>
 #include <time.h>
 
-//PROTOTIPOS____________________________________________________
+/**
+     
+     @author David Sanchez  
+     @date 30/03/2017
+     @file ej4.c
+     @brief Ejercicio que realiza la comprobación del minimo de cada
+     columna de una matriz
 
-int ** reservarMemoria(int nFil, int nCol);
-int * reservaVector(int nCol);
-void rellenaMatriz(int ** matriz, int nFil, int nCol);
+
+*/
+
+int ** reservarMemoria(int nFil, int nCol); ///< Reserva memoria para una matriz 
+int * reservaVector(int nCol);     ///< Reserva memoria para un vector 
+void rellenaMatriz(int ** matriz, int nFil, int nCol); ///< Rellena una matriz de enteros
 void imprimeMatriz(int ** matriz, int nFil, int nCol);
 int * minCol(int ** matriz, int nFil, int nCol, int * minimos);
 void imprimeVector(int * minimos, int nCol);
-void liberarMemoria(int ** matriz, int nFil);
+void liberarMemoria(int *** matriz, int nFil);
 
 
-//MAIN__________________________________________________________
+
 
 int main (){
 
@@ -41,12 +50,12 @@ int main (){
      printf("El vector con los minimos de cada columna es → ");
      imprimeVector(minimos,nCol);
 
-     liberarMemoria(matriz,nFil);
+     liberarMemoria(&matriz,nFil);
 
      return 0;
 }
 
-//FUNCIONES_____________________________________________________
+
 
 int ** reservarMemoria(int nFil, int nCol){
 
@@ -159,12 +168,11 @@ void imprimeVector(int * minimos, int nCol){
 
 }
 
-void liberarMemoria(int ** matriz, int nFil){
+void liberarMemoria(int *** matriz, int nFil){
 
      int i=0;
 
      for(i=0;i<nFil;i++){
           free(*(matriz+i));
      }
-     free(matriz);
 }

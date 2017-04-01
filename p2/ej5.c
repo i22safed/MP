@@ -23,7 +23,8 @@ char ** reservarMemoria(char * cadena, int * palabras, int * caracteres);
 void rellenaMatriz(char ** vCad,char * cadena, int palabras, int * caracteres);
 void imprimeMatriz(char ** vCad, int palabras, int * caracteres);
 float calcularMedia(int * caracteres, int palabras);
-int * vectorFrec(int * caracteres, int palabras);
+int * vectorFrec(int * caracteres, int palabras, int maximo);
+void liberarMemoria(char ** vCad,int palabras, int * vFrec);
 
 
 
@@ -38,6 +39,7 @@ int main(){
      int palabras=0;
      int caracteres[10],i=0;
      int * vFrec;
+     int maximo = 0;
 
      // Declaramos una matriz que se asignará de manera irregular
 
@@ -52,7 +54,22 @@ int main(){
 
      printf("\nLa media es de la longuitud de las palabras es → %.2f letras\n",media);
 
-     vFrec = vectorFrec(caracteres,palabras);
+     for(i=0;i<palabras;i++){
+
+          if(caracteres[i]>=maximo){
+               maximo = caracteres[i];
+          }
+     }
+
+     vFrec = vectorFrec(caracteres,palabras,maximo);
+
+     for(i=1;i<=maximo;i++){
+
+          printf("\nEl numero de apariciones de palabras de longuitud %i es → %i\n",i,vFrec[i]);
+
+     }
+
+     liberarMemoria(vCad,palabras,vFrec);
 
      return 0;
 }
@@ -202,20 +219,49 @@ float calcularMedia(int * caracteres, int palabras){
 
 }
 
-int * vectorFrec(int * caracteres, int palabras){
+int * vectorFrec(int * caracteres, int palabras, int maximo){
 
      int i=0;
      int * vFrec;
 
-     if((vFrec=(int *)malloc(palabras*sizeof(int)))==NULL){
+
+     if((vFrec=(int *)malloc(maximo*sizeof(int)))==NULL){
 
           printf("\nError no ha sido posible la reserva para %i elementos\n",palabras);
 
      }else{
 
-          printf("\nLa reserva para %i elementos se ha realizado de manera correcta",palabras);
+          printf("\nLa reserva para %i elementos se ha realizado de manera correcta\n",palabras);
      }
 
+     for(i=0;i<=maximo;i++){
+
+          vFrec[i]=0;
+
+     }
+
+     // Tomamos el vector de caracteres para realizar el analisis de frecuencias
+
+     for(i=0;i<palabras;i++){
+
+          vFrec[caracteres[i]] = vFrec[caracteres[i]] + 1;
+
+     }
 
      return vFrec;
+}
+
+void liberarMemoria(char ** vCad,int palabras, int * vFrec){
+
+     int i=0;
+
+     for(i=0;i<palabras;i++){      // Liberamos las filas
+
+          free(*(vCad+i));
+
+     }
+
+     free(vCad);
+     free(vFrec);
+
 }

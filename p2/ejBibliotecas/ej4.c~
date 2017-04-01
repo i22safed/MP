@@ -1,19 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "funciones.h"
 
-//PROTOTIPOS____________________________________________________
-
-int ** reservarMemoria(int nFil, int nCol);
-int * reservaVector(int nCol);
-void rellenaMatriz(int ** matriz, int nFil, int nCol);
-void imprimeMatriz(int ** matriz, int nFil, int nCol);
-int * minCol(int ** matriz, int nFil, int nCol, int * minimos);
-void imprimeVector(int * minimos, int nCol);
-void liberarMemoria(int ** matriz, int nFil);
-
-
-//MAIN__________________________________________________________
 
 int main (){
 
@@ -41,7 +30,7 @@ int main (){
      printf("El vector con los minimos de cada columna es → ");
      imprimeVector(minimos,nCol);
 
-     liberarMemoria(matriz,nFil);
+     liberarMemoria(&matriz,nFil);
 
      return 0;
 }
@@ -159,12 +148,11 @@ void imprimeVector(int * minimos, int nCol){
 
 }
 
-void liberarMemoria(int ** matriz, int nFil){
+void liberarMemoria(int *** matriz, int nFil){
 
      int i=0;
 
      for(i=0;i<nFil;i++){
           free(*(matriz+i));
      }
-     free(matriz);
 }
