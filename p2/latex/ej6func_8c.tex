@@ -1,0 +1,249 @@
+\hypertarget{ej6func_8c}{}\section{Referencia del Archivo ej6func.\+c}
+\label{ej6func_8c}\index{ej6func.\+c@{ej6func.\+c}}
+
+
+Fichero de funciones del \hyperlink{ej6_8c}{ej6.\+c}.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ej6headers.\+h\char`\"{}}\\*
+Dependencia gráfica adjunta para ej6func.\+c\+:
+% FIG 0
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int $\ast$$\ast$ \hyperlink{ej6func_8c_a30ee790bb9efa2a4e4e788a608c7c1e0}{reservar\+Memoria} (int n\+Fil, int n\+Col)
+\begin{DoxyCompactList}\small\item\em Función cuyo objetivo es reservar memoria para una matriz de n\+Fil x n\+Col. Inicialmente se reserva para el número de filas en\+: \end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{ej6func_8c_a8f2609339794576b8291c5b59355148b}{reserva\+Vector} (int n\+Col)
+\begin{DoxyCompactList}\small\item\em Reserva tantos elementos como columnas tenga la matriz original. \end{DoxyCompactList}\item 
+void \hyperlink{ej6func_8c_a8b6f82a062e7dc44804175d315ce66b0}{rellena\+Matriz} (int $\ast$$\ast$matriz, int n\+Fil, int n\+Col)
+\begin{DoxyCompactList}\small\item\em Función cuyo objetivo es recorrer la matriz por filas y columnas rellenando con valores aleatorios cada posición. \end{DoxyCompactList}\item 
+void \hyperlink{ej6func_8c_a5bf79a38c110ff51fb779540789d2785}{imprime\+Matriz} (int $\ast$$\ast$matriz, int n\+Fil, int n\+Col)
+\begin{DoxyCompactList}\small\item\em Imprime la en cuestión matriz por pantalla. \end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{ej6func_8c_a8fa6216ce00b8b62011c1dd32b7cbffc}{min\+Col} (int $\ast$$\ast$matriz, int n\+Fil, int n\+Col, int $\ast$minimos)
+\begin{DoxyCompactList}\small\item\em Recorremos la matriz de manera tal que por cada iteración de columna se recorra todas las filas comprobando en cada columna el menor elemento. Finalmente se devolverá un vector con cada minimo de cada columna. \end{DoxyCompactList}\item 
+void \hyperlink{ej6func_8c_a1ead1d549f66cfcd72604da8a1cb7d40}{imprime\+Vector} (int $\ast$minimos, int n\+Col)
+\begin{DoxyCompactList}\small\item\em Imprime el vector con los minimos de cada columna por pantalla. \end{DoxyCompactList}\item 
+void \hyperlink{ej6func_8c_a355bfbaa30c37efafef0e1f09e60d058}{liberar\+Memoria} (int $\ast$$\ast$matriz, int n\+Fil)
+\begin{DoxyCompactList}\small\item\em Funcion que libera memoria por filas de la matriz. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Fichero de funciones del \hyperlink{ej6_8c}{ej6.\+c}. 
+
+\begin{DoxyAuthor}{Autor}
+David Sánchez 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+01/03/2017 
+\end{DoxyDate}
+
+
+\subsection{Documentación de las funciones}
+\index{ej6func.\+c@{ej6func.\+c}!imprime\+Matriz@{imprime\+Matriz}}
+\index{imprime\+Matriz@{imprime\+Matriz}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{imprime\+Matriz(int $\ast$$\ast$matriz, int n\+Fil, int n\+Col)}{imprimeMatriz(int **matriz, int nFil, int nCol)}}]{\setlength{\rightskip}{0pt plus 5cm}void imprime\+Matriz (
+\begin{DoxyParamCaption}
+\item[{int $\ast$$\ast$}]{matriz, }
+\item[{int}]{n\+Fil, }
+\item[{int}]{n\+Col}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a5bf79a38c110ff51fb779540789d2785}{}\label{ej6func_8c_a5bf79a38c110ff51fb779540789d2785}
+
+
+Imprime la en cuestión matriz por pantalla. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & $\ast$$\ast$ matriz → Matriz original \\
+\hline
+{\em int} & n\+Fil → Especifica el numero de filas de la matriz \\
+\hline
+{\em int} & n\+Col → Especifica el numero de columnas de la matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+N/A (tipo void) 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+N/A 
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+n\+Fil \&\& n\+Col $>$ 0 y la reserva de la matriz != N\+U\+LL 
+\end{DoxyPrecond}
+\index{ej6func.\+c@{ej6func.\+c}!imprime\+Vector@{imprime\+Vector}}
+\index{imprime\+Vector@{imprime\+Vector}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{imprime\+Vector(int $\ast$minimos, int n\+Col)}{imprimeVector(int *minimos, int nCol)}}]{\setlength{\rightskip}{0pt plus 5cm}void imprime\+Vector (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{minimos, }
+\item[{int}]{n\+Col}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a1ead1d549f66cfcd72604da8a1cb7d40}{}\label{ej6func_8c_a1ead1d549f66cfcd72604da8a1cb7d40}
+
+
+Imprime el vector con los minimos de cada columna por pantalla. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & $\ast$ minimos → Vector con los minimos de cada columna \\
+\hline
+{\em int} & n\+Col → Especifica el numero de columnas de la matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+N/A (tipo void) 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+N/A 
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+N/A 
+\end{DoxyPrecond}
+\index{ej6func.\+c@{ej6func.\+c}!liberar\+Memoria@{liberar\+Memoria}}
+\index{liberar\+Memoria@{liberar\+Memoria}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{liberar\+Memoria(int $\ast$$\ast$matriz, int n\+Fil)}{liberarMemoria(int **matriz, int nFil)}}]{\setlength{\rightskip}{0pt plus 5cm}void liberar\+Memoria (
+\begin{DoxyParamCaption}
+\item[{int $\ast$$\ast$}]{matriz, }
+\item[{int}]{n\+Fil}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a355bfbaa30c37efafef0e1f09e60d058}{}\label{ej6func_8c_a355bfbaa30c37efafef0e1f09e60d058}
+
+
+Funcion que libera memoria por filas de la matriz. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & $\ast$$\ast$ matriz → Matriz original \\
+\hline
+{\em int} & n\+Fil → Especifica el numero de filas de la matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+N/A (tipo void) 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+N/A 
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+N/A 
+\end{DoxyPrecond}
+\index{ej6func.\+c@{ej6func.\+c}!min\+Col@{min\+Col}}
+\index{min\+Col@{min\+Col}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{min\+Col(int $\ast$$\ast$matriz, int n\+Fil, int n\+Col, int $\ast$minimos)}{minCol(int **matriz, int nFil, int nCol, int *minimos)}}]{\setlength{\rightskip}{0pt plus 5cm}int $\ast$ min\+Col (
+\begin{DoxyParamCaption}
+\item[{int $\ast$$\ast$}]{matriz, }
+\item[{int}]{n\+Fil, }
+\item[{int}]{n\+Col, }
+\item[{int $\ast$}]{minimos}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a8fa6216ce00b8b62011c1dd32b7cbffc}{}\label{ej6func_8c_a8fa6216ce00b8b62011c1dd32b7cbffc}
+
+
+Recorremos la matriz de manera tal que por cada iteración de columna se recorra todas las filas comprobando en cada columna el menor elemento. Finalmente se devolverá un vector con cada minimo de cada columna. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & $\ast$$\ast$ matriz → Matriz original \\
+\hline
+{\em int} & n\+Fil → Especifica el numero de filas de la matriz \\
+\hline
+{\em int} & n\+Col → Especifica el numero de columnas de la matriz \\
+\hline
+{\em int} & $\ast$ minimos → vector que almacena el minimo de cada columna \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+minimos → Vector con los minimos de cada columna 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+n\+Fil \&\& n\+Col $>$ 0 y la reserva de la matriz != N\+U\+LL 
+\end{DoxyPrecond}
+\index{ej6func.\+c@{ej6func.\+c}!rellena\+Matriz@{rellena\+Matriz}}
+\index{rellena\+Matriz@{rellena\+Matriz}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{rellena\+Matriz(int $\ast$$\ast$matriz, int n\+Fil, int n\+Col)}{rellenaMatriz(int **matriz, int nFil, int nCol)}}]{\setlength{\rightskip}{0pt plus 5cm}void rellena\+Matriz (
+\begin{DoxyParamCaption}
+\item[{int $\ast$$\ast$}]{matriz, }
+\item[{int}]{n\+Fil, }
+\item[{int}]{n\+Col}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a8b6f82a062e7dc44804175d315ce66b0}{}\label{ej6func_8c_a8b6f82a062e7dc44804175d315ce66b0}
+
+
+Función cuyo objetivo es recorrer la matriz por filas y columnas rellenando con valores aleatorios cada posición. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & $\ast$$\ast$ matriz → Matriz original \\
+\hline
+{\em int} & n\+Fil → Especifica el numero de filas de la matriz \\
+\hline
+{\em int} & n\+Col → Especifica el numero de columnas de la matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+N/A (tipo void) 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+N/A 
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+n\+Fil \&\& n\+Col $>$ 0 y la reserva de la matriz != N\+U\+LL 
+\end{DoxyPrecond}
+\index{ej6func.\+c@{ej6func.\+c}!reservar\+Memoria@{reservar\+Memoria}}
+\index{reservar\+Memoria@{reservar\+Memoria}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{reservar\+Memoria(int n\+Fil, int n\+Col)}{reservarMemoria(int nFil, int nCol)}}]{\setlength{\rightskip}{0pt plus 5cm}int $\ast$$\ast$ reservar\+Memoria (
+\begin{DoxyParamCaption}
+\item[{int}]{n\+Fil, }
+\item[{int}]{n\+Col}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a30ee790bb9efa2a4e4e788a608c7c1e0}{}\label{ej6func_8c_a30ee790bb9efa2a4e4e788a608c7c1e0}
+
+
+Función cuyo objetivo es reservar memoria para una matriz de n\+Fil x n\+Col. Inicialmente se reserva para el número de filas en\+: 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & n\+Fil → Especifica el numero de filas que va a poseer la matriz \\
+\hline
+{\em int} & n\+Col → Especifica el numero de columnas que va a poseer la matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+matriz → Una matriz reservada de n\+Fil x n\+Col 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+N/A 
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+n\+Fil $>$ 0 y n\+Col $>$ 0 {\ttfamily M = (int $\ast$$\ast$)malloc(n\+Fil$\ast$sizeof(int$\ast$));}
+\end{DoxyPrecond}
+Para luego reservar en cada fila n\+Col elementos \index{ej6func.\+c@{ej6func.\+c}!reserva\+Vector@{reserva\+Vector}}
+\index{reserva\+Vector@{reserva\+Vector}!ej6func.\+c@{ej6func.\+c}}
+\subsubsection[{\texorpdfstring{reserva\+Vector(int n\+Col)}{reservaVector(int nCol)}}]{\setlength{\rightskip}{0pt plus 5cm}int $\ast$ reserva\+Vector (
+\begin{DoxyParamCaption}
+\item[{int}]{n\+Col}
+\end{DoxyParamCaption}
+)}\hypertarget{ej6func_8c_a8f2609339794576b8291c5b59355148b}{}\label{ej6func_8c_a8f2609339794576b8291c5b59355148b}
+
+
+Reserva tantos elementos como columnas tenga la matriz original. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em int} & n\+Col → Especifica el numero de columnas de la matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+v → Vector reservado dinamicamente 
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondición}
+N/A 
+\end{DoxyPostcond}
+\begin{DoxyPrecond}{Precondición}
+n\+Col $>$ 0 
+\end{DoxyPrecond}

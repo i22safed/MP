@@ -1,0 +1,60 @@
+\hypertarget{ej6_8c}{}\section{Referencia del Archivo ej6.\+c}
+\label{ej6_8c}\index{ej6.\+c@{ej6.\+c}}
+
+
+Programa que utilizando matrices dinámicas realice de manera secuencial las siguientes funciones.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ej6headers.\+h\char`\"{}}\\*
+Dependencia gráfica adjunta para ej6.\+c\+:
+% FIG 0
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries main} ()\hypertarget{ej6_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{ej6_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Programa que utilizando matrices dinámicas realice de manera secuencial las siguientes funciones. 
+
+\begin{DoxyAuthor}{Autor}
+David Sánchez 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+01/03/2017
+\end{DoxyDate}
+\begin{DoxyVersion}{Versión}
+1.\+0 · Reservar memoria para una matriz de {\ttfamily n\+Filas x n\+Columnas}
+\end{DoxyVersion}
+· Función que rellene una matriz con valores aleatorios en el intervalo \mbox{[}1,20\mbox{]}
+
+· Función que imprima una matriz por pantalla, que utilice la aritmética de punteros para recorrer la matriz
+
+· Función que devuelva un vector dinámico con los mínimos de cada colmna
+
+· Función que libere la memoria de la matriz
+
+El funcinamiento del programa será el siguiente\+: \begin{DoxyVerb} · Se iniciará la semilla para la generación de números aleatorios
+
+ · Se le pedirá al usuario que introduzca el numero de filas además de
+ el numero de columnas
+
+ · Una vez obtenido los parámetros anteriores, se procederá a la reserva
+ de memoria de ```nFil x nCol```
+
+ · Se reservará tambien un vector llamado minimos cuya dimensión será
+ nCol, que almacenará el minimo de cada columna
+
+ · Una vez reservada la memoria para ```nFil x nCol```, rellenaremos la
+ matriz de valores aleatorios pertenecientes al rango especificado
+
+ · El siguiente paso será recorrer la matriz de manera que por cada
+ iteracción de columna recorra todas las filas
+
+ · Finalmente se devolverá dicho vector con los minimos de cada columna
+ al main donde será imprimido por pantalla\end{DoxyVerb}
