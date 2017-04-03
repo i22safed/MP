@@ -1,3 +1,5 @@
+// Compilar con gcc ej7.c -o "salida.exe" libej6.a
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
