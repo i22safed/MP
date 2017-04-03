@@ -31,9 +31,10 @@ int divisionRecursiva(int dividendo,int divisor, int cociente, int resto){
 
      }else{
 
-          cociente++;
-          dividendo = divisionRecursiva((dividendo - divisor),divisor,cociente,resto);
+          dividendo = divisionRecursiva((dividendo - divisor),divisor,cociente+1,resto);
 
      }
+
+
 
 }
