@@ -20,8 +20,8 @@ Repositorio para las practicas de Metodología de la Programación
 
 ## Práctica 3. Reserva y Gestión de Memoria.
 
-  · Recursividad
-  · Ficheros de texto
-  · Ficheros binarios 
+  · Recursividad  
+  · Ficheros de texto  
+  · Ficheros binarios  
 
 [![Progreso](https://img.shields.io/badge/Ejercicios-1--12-red.svg)]() 
