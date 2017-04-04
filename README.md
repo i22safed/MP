@@ -24,6 +24,7 @@ Repositorio para las practicas de Metodología de la Programación
   · Ficheros de texto  
   · Ficheros binarios  
 
-[![Progreso](https://img.shields.io/badge/Ejercicios-1--3-brightgreen.svg)]() 
-[![Progreso](https://img.shields.io/badge/Ejercicios-4--12-red.svg)]() 
+[![Progreso](https://img.shields.io/badge/Ejercicios-1--5-brightgreen.svg)]() 
+[![Progreso](https://img.shields.io/badge/Ejercicios-6-orange.svg)]() 
+[![Progreso](https://img.shields.io/badge/Ejercicios-7--12-red.svg)]() 
 
