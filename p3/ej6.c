@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-// Creamos fichero
-// Metemos contenido
-// Cerramos fichero
-// Abrimos fichero
-// Cogemos contenido
+#include <ctype.h>
+// Creamos fichero → ya
+// Metemos contenido → ya
+// Cerramos fichero → ya
+// Abrimos fichero → ya
+// Cogemos contenido  → ya
 // Ponemos en mayusculas
 // Copiamos dentro del fichero
 // Cerramos fichero
@@ -29,10 +30,13 @@ int main(){
 
      guardarFichero(nombre,cadena);
 
+     minMayus(nombre,cadena);
+
      return 0;
 }
 
-void guardarFichero(char * nombre, char * cadena){
+void guardarFichero(char * nombre, char * cadena){     // Escribe la cadena que
+                                                       // recibe y cierra el fichero
 
      FILE * fichero;
 
@@ -55,10 +59,60 @@ void guardarFichero(char * nombre, char * cadena){
 
 }
 
-void minMayus(char * nombre, char * cadena){
+void minMayus(char * nombre, char * cadena){           // Abre el fichero coge la
+                                                       // lee caracter a caracter
+                                                       // y lo cambia a mayuscula
+     int i=0;
 
+     FILE * fichero;          // Declaramos el puntero del fichero
+     FILE * ficheroMayus;     // Declaramos el fichero donde irán con mayusculas
+     char  nombreSalida[50]="mayusculas-";
+     strcat(nombreSalida,nombre);
+     char aux[strlen(cadena)];
 
+     printf("\nEl nombre de fichero de salida es → %s\n",nombreSalida);
 
+     if((fichero = fopen(nombre,"r"))==NULL){
 
+          printf("\nError al abrir el fichero %s\n",nombre);
+          exit (-1);
+
+     }else{
+
+          printf("\nEl fichero %s se ha abierto correctamente \n",nombre);
+
+     }
+
+     // Leemos la linea del fichero
+
+     while (fscanf(fichero,"%s",aux)!=EOF){
+
+               printf("\nLa cadena en aux es → %s\n",aux );
+
+     }
+
+     for(i=0;i<(strlen(aux));i++){
+
+          
+          aux[i]=toupper(aux[i]);
+
+     }
+
+     if((ficheroMayus = fopen(nombreSalida,"w"))==NULL){
+          printf("\nError al abrir el fichero %s\n",nombreSalida);
+          exit (-1);
+
+     }else{
+
+          printf("\nEl fichero %s se ha abierto correctamente \n",nombreSalida);
+
+     }
+
+     fputs(aux,ficheroMayus);      // Escribimos en el fichero la cadena
+                                   // fgets guarda el \n y \0
+                                   // recomendable fgets pero hay que cambiar \n por \0
+
+     fclose(fichero);
+     fclose(ficheroMayus);
 
 }
