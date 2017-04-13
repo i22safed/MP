@@ -2,14 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-// Creamos fichero → ya
-// Metemos contenido → ya
-// Cerramos fichero → ya
-// Abrimos fichero → ya
-// Cogemos contenido  → ya
-// Ponemos en mayusculas
-// Copiamos dentro del fichero
-// Cerramos fichero
 
 void guardarFichero(char * nombre, char * cadena);
 void minMayus(char * nombre, char * cadena);
@@ -29,7 +21,6 @@ int main(){
      strcat(nombre,".txt\0");
 
      guardarFichero(nombre,cadena);
-
      minMayus(nombre,cadena);
 
      return 0;
@@ -69,6 +60,7 @@ void minMayus(char * nombre, char * cadena){           // Abre el fichero coge l
      char  nombreSalida[50]="mayusculas-";
      strcat(nombreSalida,nombre);
      char aux[strlen(cadena)];
+     char c; 
 
      printf("\nEl nombre de fichero de salida es → %s\n",nombreSalida);
 
@@ -85,11 +77,16 @@ void minMayus(char * nombre, char * cadena){           // Abre el fichero coge l
 
      // Leemos la linea del fichero
 
-     while (fscanf(fichero,"%s",aux)!=EOF){
+	while(fgets(aux,100,fichero)!=NULL){
 
-               printf("\nLa cadena en aux es → %s\n",aux );
+		if(aux[strlen(aux)-1]=='\n'){
 
-     }
+			cadena[strlen(cadena)-1]='\0'; // Esto es importante
+		}
+
+	}
+
+	printf("\nLa cadena es: %s\n",aux);
 
      for(i=0;i<(strlen(aux));i++){
 
