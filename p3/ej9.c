@@ -13,12 +13,17 @@ struct libro{
 
 int existenciaLibro(char * nombreRegistro,char * nombreLibro);
 void introducirLibro(char * nombreRegistro);
+int contarLibros(char * nombreRegistro);
+struct libro * listarLibros(char * nombreRegistro, struct libro * vector);
+
+struct libro * reservaMemoria(int nLibros);
+
 
 int main(int argc, char ** argv){
 
+     struct libro * vector;
      FILE * registro;
-     int opcion = 1;
-     int match = 0;
+     int opcion = 1,match = 0, nLibros=0;
      char nombreLibro[24];
 
      // Comprobamos si han pasado el nombre del fichero por linea de ordenes
@@ -100,14 +105,32 @@ int main(int argc, char ** argv){
 
                     introducirLibro(nombreRegistro);
 
-
                break;
 
                case 3:
 
+                    nLibros = contarLibros(nombreRegistro);
+                    printf("\nEl numero de libros es %i\n",nLibros);
+
                break;
 
                case 4:
+
+                    // Primeramente comprobamos que el numero de libros es dto 0
+
+                    if(nLibros!=0){
+
+                         vector = reservaMemoria(nLibros);
+                         vector = listarLibros(nLibros,aux);
+
+
+                    }else{
+
+                         printf("\nNo se han contado libros\n", );
+                         exit(-1);
+
+                    }
+
 
                break;
 
@@ -199,5 +222,68 @@ void introducirLibro(char * nombreRegistro){
      fprintf(f, "%s\n%s\n%.2f %i",aux.titulo,aux.autor,aux.precio,aux.unidades );
 
      fclose(f);
+
+}
+
+int contarLibros(char * nombreRegistro){
+
+     FILE * f;
+     int n = 0;
+     struct libro aux;
+
+     f = fopen(nombreRegistro,"r");
+
+     if(f==NULL){
+
+          printf("\nError. El fichero %s no se ha podido abrir\n",nombreRegistro);
+          exit(-1);
+
+     }else{
+
+          printf("\nEl fichero %s se ha abierto correctamente\n",nombreRegistro);
+
+     }
+
+     // Leemos el fichero
+
+     while((fscanf(f,"%s\n%s\n%f %i",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
+
+          n++;
+
+     }
+
+     fclose(f);
+
+     return n;
+
+
+}
+
+struct punto * reservaMemoria(int nLibros){
+
+     struct libro * aux;
+
+     if((aux = (struct libro *)calloc(sizeof(struct libro), nLibros))==NULL){
+
+          printf("\nSe ha reservado memoria para %i elementos \n",nLibros);
+
+     }else{
+
+          printf("\nError en la reserva\n");
+          exit(-1);
+
+     }
+
+     return aux;
+
+}
+
+struct libro * listarLibros(char * nombreRegistro, struct libro * vector){
+
+     
+
+
+
+
 
 }
