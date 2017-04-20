@@ -14,7 +14,8 @@ struct libro{
 int existenciaLibro(char * nombreRegistro,char * nombreLibro);
 void introducirLibro(char * nombreRegistro);
 int contarLibros(char * nombreRegistro);
-struct libro * listarLibros(char * nombreRegistro, struct libro * vector);
+void listarLibros(char * nombreRegistro, int nLibros, struct libro * vector);
+void venderLibro(char * nombreRegistro, char * nombreLibro);
 
 struct libro * reservaMemoria(int nLibros);
 
@@ -121,12 +122,12 @@ int main(int argc, char ** argv){
                     if(nLibros!=0){
 
                          vector = reservaMemoria(nLibros);
-                         vector = listarLibros(nLibros,aux);
+                         listarLibros(nombreRegistro,nLibros,vector);
 
 
                     }else{
 
-                         printf("\nNo se han contado libros\n", );
+                         printf("\nNo se han encontrado libros\n");
                          exit(-1);
 
                     }
@@ -135,6 +136,11 @@ int main(int argc, char ** argv){
                break;
 
                case 5:
+
+                    printf("\nIntroduzca el nombre del libro\n");
+                    gets(nombreLibro);
+
+
 
                break;
 
@@ -145,18 +151,21 @@ int main(int argc, char ** argv){
                case 0:
 
                     printf("\nAdioos!\n");
+                    free(vector);
                     exit(-1);
 
                break;
           }
      }
 
+
+
      return 0;
 }
 
-// Funciones de basicas
 
-// Funciones especificas
+// FUNCIONES ESPECIFICAS ////////////////////////////////////////////
+
 
 int existenciaLibro(char * nombreRegistro, char * nombreLibro){
 
@@ -244,8 +253,6 @@ int contarLibros(char * nombreRegistro){
 
      }
 
-     // Leemos el fichero
-
      while((fscanf(f,"%s\n%s\n%f %i",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
 
           n++;
@@ -259,31 +266,78 @@ int contarLibros(char * nombreRegistro){
 
 }
 
-struct punto * reservaMemoria(int nLibros){
 
-     struct libro * aux;
+void listarLibros(char * nombreLibro, int nLibros, struct libro * vector){
 
-     if((aux = (struct libro *)calloc(sizeof(struct libro), nLibros))==NULL){
+     FILE * f;
 
-          printf("\nSe ha reservado memoria para %i elementos \n",nLibros);
+     int i = 0;
+     struct libro aux;
 
-     }else{
+     f = fopen(nombreLibro,"r");
 
-          printf("\nError en la reserva\n");
+     if(f==NULL){
+
+          printf("\nEl fichero %s no se ha podido abrir\n",nombreLibro);
           exit(-1);
 
      }
 
-     return aux;
+
+     while((fscanf(f,"%s\n%s\n%f %i",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
+
+          strcpy(vector[i].titulo,aux.titulo);
+          strcpy(vector[i].autor,aux.autor);
+          vector[i].precio = aux.precio;
+          vector[i].unidades = aux.unidades;
+          i++;
+     }
+
+     for(i=0;i<nLibros;i++){
+
+          printf("\nLibro %i _____________________________________________\n",i);
+          printf("\nTitulo → %s\n",vector[i].titulo);
+          printf("\nAutor → %s\n", vector[i].autor);
+          printf("\nPrecio → %.2f€\n", vector[i].precio);
+          printf("\nUnidades → %i\n", vector[i].unidades);
+          printf("_____________________________________________________\n" );
+     }
+
+     fclose(f);
 
 }
 
-struct libro * listarLibros(char * nombreRegistro, struct libro * vector){
+void venderLibro(char * nombreRegistro, char * nombreLibro){
+
+     FILE * f;
 
      
 
 
 
 
+}
+
+
+
+// FUNCIONES BASICAS ////////////////////////////////////////////////
+
+
+struct libro * reservaMemoria(int nLibros){
+
+     struct libro * aux;
+
+     if((aux = (struct libro *)calloc(sizeof(struct libro), nLibros))==NULL){
+
+          printf("\nError en la reserva\n");
+          exit(-1);
+
+     }else{
+
+          printf("\nSe ha reservado memoria para %i elementos \n",nLibros);
+
+     }
+
+     return aux;
 
 }
