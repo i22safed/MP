@@ -255,7 +255,7 @@ int contarLibros(char * nombreRegistro){
 
      while((fscanf(f,"%s\n%s\n%f %i",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
 
-          n++;
+               n++;
 
      }
 
@@ -282,7 +282,6 @@ void listarLibros(char * nombreLibro, int nLibros, struct libro * vector){
           exit(-1);
 
      }
-
 
      while((fscanf(f,"%s\n%s\n%f %i",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
 
@@ -311,7 +310,7 @@ void venderLibro(char * nombreRegistro, char * nombreLibro){
 
      FILE * f;
 
-     
+
 
 
 
