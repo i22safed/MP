@@ -4,18 +4,3 @@ pepe
 antonio
 perez
 34.50 4
-puente
-turbo
-243.10 5
-fuenteovejuna
-antonio
-34.10 3
-galdos
-fsdjk
-32.10 3
-cabesa
-joni
-34.20 1
-patatas
-jose
-3.40 9
