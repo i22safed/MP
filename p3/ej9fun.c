@@ -81,6 +81,7 @@ int contarLibros(char * nombreRegistro){
      FILE * f;
      int n = 0;
      struct libro aux;
+     char linea[24];
 
      f = fopen(nombreRegistro,"r");
 
@@ -95,7 +96,7 @@ int contarLibros(char * nombreRegistro){
 
      }
 
-     while((fscanf(f,"%s\n%s\n%f %i",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
+     while((fgets(linea,24,f))!=NULL){
 
                n++;
 
@@ -103,7 +104,7 @@ int contarLibros(char * nombreRegistro){
 
      fclose(f);
 
-     return n;
+     return n/3;
 
 
 }
