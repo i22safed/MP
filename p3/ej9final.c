@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 struct libro{
 
@@ -16,7 +17,7 @@ struct libro{
 int existeLibro(char * nombreRegistro,char * nombreLibro);
 void introducirLibro(char * nombreRegistro);
 int conteoLibros(char * nombreRegistro);
-void listarLibros(char * nombreRegistro,int nLibros);
+void listarLibros(char * nombreRegistro,int nLibros, struct libro * vector);
 struct libro * reservaMemoria(int nLibros);
 
 int main(int argc, char ** argv){
@@ -123,7 +124,9 @@ int main(int argc, char ** argv){
 
                case 4:
 
-                    listarLibros(nombreRegistro,nLibros);
+
+                    listarLibros(nombreRegistro,nLibros,vector);
+
 
                break;
 
@@ -254,8 +257,10 @@ int conteoLibros(char * nombreRegistro){
 void listarLibros(char * nombreRegistro,int nLibros,struct libro * vector){
 
      FILE * f;
-     int i = 0;
-     struct libro aux;
+     int i = 0, j = 0;
+     int espacio = 0;
+     float precio = 0; int unidades = 0;
+     char cad[50];
 
      if((f=fopen(nombreRegistro,"r"))==NULL){
 
@@ -270,12 +275,45 @@ void listarLibros(char * nombreRegistro,int nLibros,struct libro * vector){
 
      vector = reservaMemoria(nLibros);
 
-     while((fscanf(f,"%s\n%s\n%f %i\n",aux.titulo,aux.autor,&aux.precio,&aux.unidades))!=EOF){
+     while((fgets(cad,50,f))!=NULL){
 
-          strcpy(vector[i].titulo,aux.titulo);
-          strcpy(vector[i].autor,aux.autor);
-          vector[i].precio = aux.precio;
-          vector[i].unidades = aux.unidades;
+
+               switch (i%3) {
+                    case 0:
+
+                         if(cad[strlen(cad)-1]=='\n'){
+
+                              cad[strlen(cad)-1]='\0';
+
+                         }
+
+                         strcpy(vector[j].titulo,cad);
+
+                    break;
+                    case 1:
+
+                         if(cad[strlen(cad)-1]=='\n'){
+
+                              cad[strlen(cad)-1]='\0';
+
+                         }
+
+                         strcpy(vector[j].autor,cad);
+
+
+                    break;
+                    case 2:
+
+                         sscanf(cad,"%f %i",&precio,&unidades);
+                         vector[j].precio = precio;
+                         vector[j].unidades = unidades;
+                         j++;
+
+                    break;
+
+               }
+
+
           i++;
 
      }
@@ -288,6 +326,7 @@ void listarLibros(char * nombreRegistro,int nLibros,struct libro * vector){
           printf("\nPrecio → %.2f€\n", vector[i].precio);
           printf("\nUnidades → %i\n", vector[i].unidades);
           printf("_____________________________________________________\n" );
+
      }
 
      free(vector);
@@ -297,19 +336,20 @@ void listarLibros(char * nombreRegistro,int nLibros,struct libro * vector){
 
 struct libro * reservaMemoria(int nLibros){
 
-     struct libros * aux;
+     struct libro * aux;
 
      if((aux = (struct libro *)calloc(sizeof(struct libro), nLibros))==NULL){
 
-          printf("\nError en la reserva \n");
+          printf("\nError en la reserva\n");
           exit(-1);
 
      }else{
 
-          printf("\nSe ha reservado memoria para %i elementos\n",nLibros);
+          printf("\nSe ha reservado memoria para %i elementos \n",nLibros);
 
      }
 
      return aux;
+
 
 }
