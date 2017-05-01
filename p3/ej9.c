@@ -6,7 +6,7 @@
 int main(int argc, char ** argv){
 
      FILE * registro;
-     struct libro * vector, unidad ;
+     struct libro * vector, unidad;
      int opcion = 1, match = 0, nLibros = 0;
      char nombreLibro[50];
 
