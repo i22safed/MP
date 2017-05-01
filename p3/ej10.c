@@ -60,6 +60,7 @@ void rellenaFichero(char * nombreFichero,int * limite, int nEle){
 
 	FILE * fichero;	// Puntero al fichero
 	int i = 0, * vector;
+     int num = 0;
 
 	if((fichero=fopen(nombreFichero,"wb"))!=NULL){
 
@@ -74,14 +75,20 @@ void rellenaFichero(char * nombreFichero,int * limite, int nEle){
 
      vector = reservaMemoria(nEle);
 
+     printf("\nLos valores del fichero son → ");
+
 	for(i=0;i<nEle;i++){
 
 		vector[i] = limite[0] + rand() % (limite[1] + 1 - limite[0]);
-		printf("\nEl numero a introducir es → %i \n",vector[i]);
+		printf("%i ",vector[i]);
 
 	}
 
-     fwrite(vector,sizeof(int),nEle,fichero);
+     printf("\n");
+
+     num = fwrite(vector,sizeof(int),nEle,fichero);
+
+     printf("\nNumero de elementos escritos → %i\n",num);
 
 	fclose(fichero);
      free(vector);
@@ -90,35 +97,34 @@ void rellenaFichero(char * nombreFichero,int * limite, int nEle){
 
 void leerFichero(char * nombreFichero,int nEle){
 
-     FILE * fichero;
-     int i = 0, * vector;
-     int num = 0;
 
+	FILE * fichero;	// Puntero al fichero
+	int i = 0, vector[nEle];
 
-     if((fichero=fopen(nombreFichero,"rb"))!=NULL){
+	if((fichero=fopen(nombreFichero,"rb"))!=NULL){
 
-          printf("\nEl fichero %s ha sido abierto correctamente\n",nombreFichero);
+		printf("\nEl fichero %s ha sido abierto correctamente\n",nombreFichero);
 
-     }else{
+	}else{
 
-          printf("\nError. El fichero %s no se ha podido abrir\n",nombreFichero);
-          exit(-1);
+		printf("\nError. El fichero %s no se ha podido abrir\n",nombreFichero);
+		exit(-1);
 
-     }
+	}
 
+     fread(vector,sizeof(int),nEle,fichero);
 
-     vector = reservaMemoria(nEle);
-
-
-     * vector = fread(vector,sizeof(int),nEle,fichero);
+     printf("\nLos elementos del vector son: ");
 
      for(i=0;i<nEle;i++){
 
-          printf("\nEl valor del vector es → %i\n",vector[i]);
+          printf(" %i",vector[i]);
 
      }
 
+     printf("\n");
+
      fclose(fichero);
-     free(vector);
+
 
 }
