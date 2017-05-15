@@ -81,6 +81,8 @@ void insertarDelante(struct lista ** cabeza, int num){
 
 }
 
+void borrarElemento
+
 void imprimirLista(struct lista * cabeza){
 
      struct lista * aux = NULL;
