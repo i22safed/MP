@@ -65,7 +65,44 @@ void introducirLibro(char * nombreRegistro){
 
      }
 
+
      fprintf(f, "%s\n%s\n%.2f %i\n",aux.titulo,aux.autor,aux.precio,aux.unidades);
+
+     /*
+
+          Funcion para guardar en el fichero, sigue el patrón de
+
+               fprintf(punteroFichero,Formato,variables)
+
+                    - puntero fichero → FILE * f;
+                    - formato → "%s\n%s\n%.2f %i\n". Esto mete:
+
+                         · Cadena
+                         · Salto de linea
+                         · Cadena
+                         · Salto de linea
+                         · Flotante (dos decimales de precisión)
+                         · Espacio
+                         · Entero
+
+                    - Ejemplo del formato
+                          _____________________libros.txt___________
+                         |girasoles ciegos
+                         |pepe
+                         |2.70 5
+                         |juego de tronos
+                         | ...
+
+                    - Variables
+
+                         · aux.titulo → Cadena
+                         · aux.autor → Cadena
+                         · aux.precio → Flotante
+                         · aux.unidades → Entero
+
+
+     */
+
 
      fclose(f);
 
@@ -93,6 +130,24 @@ int conteoLibros(char * nombreRegistro){
           i++;
 
      }
+
+     /*
+
+          Leemos lineas hasta que fgets devuelva NULL, dicha función posee el
+          formato →
+
+                    fgets(aux,50,f);
+
+                    - aux → Cadena donde vamos a guardar la información
+                    - 50 → Numero de caractereres maximos que vamos a leer
+                    - f → Puntero del fichero (FILE * f)
+
+          Esta funcion la utilizaremos solamente para el conteo de lineas del
+          fichero. Para trabajar con los datos como enteros y flotantes (no cadenas)
+          del fichero tendriamos que utilizar sscanf de la cadena obtenida con fgets
+          y extraer los datos que queramos (mas adelante lo vemos)
+
+     */
 
      fclose(f);
 
@@ -143,6 +198,33 @@ void listarLibros(char * nombreRegistro,int nLibros,struct libro * vector){
 
           fgets(cad,50,f);
           sscanf(cad,"%f %i",&precio,&unidades);
+
+          /*
+
+               En este caso si vamos a trabajar despues con la linea de precio
+               y unidades, utilizamos sscanf poniendole como flujo de entrada
+               la cadena leida con fgets. El comando sscanf posee el siguiente
+               patrón:
+
+                    sscanf(cad,"%f %i",&precio,&unidades);
+
+                    · cad → variable utilizada por fgets para almacenar cada linea
+                    del fichero
+
+                    · "%f %i" (Formato) → La linea a sido guardada mediante la
+                    secuencia "flotante + espacio + entero" con fgets, por lo
+                    tanto el formato para separarla debe poseer el mismo formato
+
+                    · &precio, &unidades → Variables donde se almacenarán los
+                    valores de la linea recogida con fgets
+
+               Esto se hace para introducir valores diferentes que hay en una
+               misma linea en sus respectivas variables 
+
+
+          */
+
+
           vector[i].precio = precio;
           vector[i].unidades = unidades;
 
