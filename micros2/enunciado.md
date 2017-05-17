@@ -11,7 +11,8 @@ serán recogidos en el main) de struct jugador (nombre, jugador, DNI, saldo
 3 strings y 1 int). El formato del fichero sera DNINombre.txt (```46XXXJose.txt```).  
 · CambiarJugador: Cambia el jugador activo  
 · Listar jugadores: Lista los jugadores y todos sus respectivos datos,reservando
-previamente vector de tipo struct  
+previamente vector de tipo struct. Será necesario tener los nombres almacenados
+en un ficheros para contar el numero de estos (vease funciones adicionales)
 · Recargar saldo: Recarga el saldo de los usuario que estén en negativo  
 · datos2Binario: Pasa los ficheros .txt a .bin  
 
@@ -42,6 +43,7 @@ siguiente:
 base de datos para poder listarlos  
 · LimpiarLinea: Borra el ```\n``` de las cadenas recogidas con gets y lo sustituye por
  ```\0```
+· Numero de Jugadores: Fichero que almacena el nombre de los jugadores
 
 Todo ello deberá ir acompañado por un ```makefile``` que compile todo el programa y
 cree bibliotecas con todos sus ```.o``` pertinentes y un destino ```clean``` que

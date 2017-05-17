@@ -9,6 +9,12 @@ struct datos{
 
 };
 
+
+// Funciones de Ruleta.h
+void addPlayer(struct datos jugador);
+void nJugadores(struct datos jugador);
+
+// Funciones adicionales
 struct datos limpiarCadena(struct datos jugador);
 
 
@@ -87,6 +93,8 @@ void addPlayer(struct datos jugador){
           en dicho fichero se mantendrán los datos personales como el balance del
           saldo del jugador
 
+          Tambien se almacenarán los jugadores en un fichero para listarlos
+
           El identificativo de cada jugador (y a su vez el nombre del fichero)
           será el DNI
 
@@ -95,9 +103,11 @@ void addPlayer(struct datos jugador){
 
      */
 
-     FILE * f;      // Puntero del jugador
+     FILE * f;                // Puntero del fichero del jugador
+     FILE * nJugadores;       // Puntero de la base de datos de la Ruleta
+
      struct datos aux;
-     char nombreFichero[40];
+     char nombreFichero[40],jugadores[]="Jugadores.txt";
 
      aux = limpiarCadena(jugador);
 
@@ -106,6 +116,8 @@ void addPlayer(struct datos jugador){
      strcat(nombreFichero,".txt");
 
      printf("\nEl nombre del fichero es %s\n",nombreFichero);
+
+     // Abrimos el fichero para escribir los datos de los jugadores
 
      if((f=fopen(nombreFichero,"r"))==NULL){
 
@@ -121,8 +133,32 @@ void addPlayer(struct datos jugador){
 
      }
 
+     // Escribimos los datos de los jugadores
+
      fprintf(f, "%s\n%s\n%s %i\n",aux.nombre,aux.apellidos,aux.DNI,jugador.saldo);
 
+     // Escribimos los nombres de los jugadores en un fichero a modo de base de
+     // datos
+
+     if(( nJugadores = fopen(jugadores,"r"))==NULL){
+
+          printf("\nEl fichero %s no existe, se creará\n",jugadores);
+          nJugadores = fopen(jugadores,"a");
+
+     }else{
+
+          printf("\nEl fichero %s se ha abierto correctamente\n",jugadores);
+          fclose(nJugadores);
+          nJugadores = fopen(jugadores,"a");
+
+     }
+
+     // Escribimos los nombres de los distintos jugadores (suponemos que no hay
+     // repetidos)
+
+     fprintf(nJugadores,"%s,%s,%s,%i\n",aux.nombre,aux.apellidos,aux.DNI,jugador.saldo);
+
+     fclose(nJugadores);
      fclose(f);
 
 }
