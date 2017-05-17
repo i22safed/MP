@@ -60,6 +60,10 @@ Funciones adicionales
      · LimpiarLinea: Borra el \n de las cadenas recogidas con gets y lo sustituye
      por \0
 
+Todo ello deberá ir acompañado por un makefile que compile todo el programa y
+cree bibliotecas con todos sus .o pertinentes y limpie los .o resultantes.
+
+
 */
 
 struct datos limpiarCadena(struct datos jugador);
