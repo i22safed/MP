@@ -8,16 +8,60 @@ struct datos{
      int saldo;
 
 };
+/*
+Ruleta UCO
 
-// Casino
-// Añadir jugadores
-void addPlayer(struct datos jugador);
-// Hacer Apuesta
-// Historial de apuestas
-// Listar jugadores
-// Salir
+Funciones para ruleta.h
 
-// Funciones adicionales
+     · Añadir jugadores: Esta función creará un fichero con los parametros (que
+     serán recogidos en el main) de struct jugador (nombre, jugador, DNI, saldo
+     3 strings y 1 int). El formato del fichero sera DNINombre.txt (46XXXJose.txt).
+
+     El nombre del jugador deberá de ser pasado por lineas de ordenes para
+     realizar las operaciones pertinentes
+
+     · CambiarJugador: Cambia el jugador activo
+
+     · Listar jugadores: Lista los jugadores y todos sus respectivos datos,
+     reservando previamente vector de tipo struct
+
+     · Recargar saldo: Recarga el saldo de los usuario que estén en negativo
+
+     · datos2Binario: Pasa los ficheros .txt a .bin
+
+Funciones para jugador.h
+
+     · Hacer Apuesta: Realiza una apuesta
+
+          · Tipo 1 → 1-18 / 19-36 (Sin contar el 0)
+          · Tipo 2 → Par / Impar
+          · Tipo 3 → Numero
+
+     Se debera almacenar las apuestas realizadas por el usuario activo almacenan
+     dolas en el fichero pertinente a continuación de los datos del mismo con el
+     formato siguiente:
+
+          Tipo | Beneficio
+          --------------------------
+            2  | +1000
+            1  | +205
+            4  | -80
+            5  | +100
+
+     · Historial de apuestas: Listar las apuestas del usuario activo
+
+     · Salir: Finaliza la ejecución del programa
+
+Funciones adicionales
+
+     · ReservaVector: Reservará memoria para el numero de jugadores que haya en
+     la base de datos para poder listarlos
+
+     · LimpiarLinea: Borra el \n de las cadenas recogidas con gets y lo sustituye
+     por \0
+
+*/
+
 struct datos limpiarCadena(struct datos jugador);
 
 
