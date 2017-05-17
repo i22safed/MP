@@ -1,1 +1,2 @@
-Juan,Gomez Luna,45946881C,5000
+Juan Gomez 45946881C 5000
+Antonio Perez 45988478M 6000

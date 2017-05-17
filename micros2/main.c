@@ -11,9 +11,9 @@ struct datos{
 
 
 // Funciones de Ruleta.h
-void addPlayer(struct datos jugador);
-void nJugadores(struct datos jugador);
-
+void addPlayer(struct datos jugador, char * jugadores);
+void listarJugadores(char * jugadores, int * numeroJugadores);
+char * activarJugador(char * jugadores, int opJugador);
 // Funciones adicionales
 struct datos limpiarCadena(struct datos jugador);
 
@@ -22,15 +22,20 @@ int main (int argc,char ** argv){
 
      int opcion = 1;
      struct datos jugador;
+     char jugadores[]="Jugadores.txt";
+     char jugadorActivo[30];
+     int numeroJugadores = 0,opJugador=0;
 
      while (opcion!=0) {
 
           printf("\n________________MENU DE LA RULETA________________\n");
 
           printf("\n1. Introducir jugador");
-          printf("\n2. Hacer apuesta");
-          printf("\n3. Consultar historial de apuestas");
-          printf("\n4. Balance de jugadores");
+          printf("\n2. Listar jugadores");
+          printf("\n3. Cambiar jugador");
+          printf("\n4. Hacer apuesta");
+          printf("\n5. Consultar historial de apuestas");
+          printf("\n6. Balance de jugadores");
           printf("\n0. Salir");
 
           printf("\n_________________________________________________\n");
@@ -53,16 +58,33 @@ int main (int argc,char ** argv){
                     printf("\nIntroduzca el saldo del jugador → ");
                     scanf("%i",&jugador.saldo);
 
-                    addPlayer(jugador);
+                    addPlayer(jugador,jugadores);
 
                     printf("\nEl jugador %s %s ha sido añadido\n",jugador.nombre,jugador.apellidos);
 
                break;
                case 2:
 
+                    printf("\n____________________JUGADORES____________________\n");
+
+                    listarJugadores(jugadores,&numeroJugadores);
+
+                    printf("\n_________________________________________________\n");
+
 
                break;
                case 3:
+
+                    printf("\n¿ Que jugador desea activar ?\n");
+
+                    listarJugadores(jugadores,&numeroJugadores);
+
+                    printf("\nOpcion → \n");
+                    scanf("%i",&opJugador);
+
+                    jugadorActivo = activarJugador(jugadores,opJugador);
+
+                    printf("\nEl jugador activo ahora es → %s \n",jugadorActivo);
 
 
                break;
@@ -85,7 +107,7 @@ int main (int argc,char ** argv){
 
 }
 
-void addPlayer(struct datos jugador){
+void addPlayer(struct datos jugador,char * jugadores){
 
      /*
 
@@ -107,7 +129,7 @@ void addPlayer(struct datos jugador){
      FILE * nJugadores;       // Puntero de la base de datos de la Ruleta
 
      struct datos aux;
-     char nombreFichero[40],jugadores[]="Jugadores.txt";
+     char nombreFichero[40];
 
      aux = limpiarCadena(jugador);
 
@@ -156,10 +178,87 @@ void addPlayer(struct datos jugador){
      // Escribimos los nombres de los distintos jugadores (suponemos que no hay
      // repetidos)
 
-     fprintf(nJugadores,"%s,%s,%s,%i\n",aux.nombre,aux.apellidos,aux.DNI,jugador.saldo);
+     fprintf(nJugadores,"%s %s %s %i\n",aux.nombre,aux.apellidos,aux.DNI,jugador.saldo);
 
      fclose(nJugadores);
      fclose(f);
+
+}
+
+void listarJugadores(char * jugadores, int * numeroJugadores){
+
+
+     FILE * nJugadores;
+     struct datos aux;
+     char cad[100];
+     int i=0;
+
+
+     if((nJugadores = fopen(jugadores,"r"))==NULL){
+
+          printf("\nError al abrir el fichero %s \n",jugadores);
+          exit(-1);
+
+     }else{
+
+          printf("\nEl fichero %s se ha abierto correctamente\n",jugadores);
+
+     }
+
+     while((fgets(cad,100,nJugadores))!=NULL){
+
+          *numeroJugadores = *numeroJugadores + 1;
+
+          sscanf(cad,"%s %s %s %i\n",aux.nombre,aux.apellidos,aux.DNI,&aux.saldo);
+          printf("\nJugador %i:\n\n",i);
+          printf("Nombre → %s\n",aux.nombre);
+          printf("Apellidos → %s\n",aux.apellidos);
+          printf("DNI → %s\n",aux.DNI);
+          printf("Saldo → %i\n",aux.saldo);
+          i++;
+
+     }
+
+}
+
+char * activarJugador(char * jugadores, int opJugador){
+
+     FILE * f;
+     char cad[100];
+     char id[30];
+     int i = 0;
+     struct datos aux;
+
+
+     if((f = fopen(jugadores,"r"))==NULL){
+
+          printf("\nError al abrir el fichero %s\n",jugadores);
+
+     }else{
+
+          printf("\nEl fichero %s se ha abierto correctamente\n",jugadores);
+
+     }
+
+     while((fgets(cad,"%s %s %s %i\n",f))!=NULL){
+
+          sscanf(cad,"%s %s %s %i\n",aux.nombre,aux.apellidos,aux.DNI,&aux.saldo);
+
+               if(i == opJugador){
+
+                    strcpy(id,aux.DNI);
+                    strcat(id,aux.nombre);
+
+                    return id;
+
+               }
+
+          i++;
+
+     }
+
+
+
 
 }
 
