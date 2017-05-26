@@ -27,6 +27,7 @@ int existeLibro(char * nombreRegistro,char * nombreLibro){
 
                if(strstr(aux,nombreLibro)!=NULL){
 
+                    fclose(f)
                     return 1;
 
                }
@@ -37,6 +38,7 @@ int existeLibro(char * nombreRegistro,char * nombreLibro){
      }
 
      fclose(f);
+     return 0; 
 
 }
 
@@ -219,7 +221,7 @@ void listarLibros(char * nombreRegistro,int nLibros,struct libro * vector){
                     valores de la linea recogida con fgets
 
                Esto se hace para introducir valores diferentes que hay en una
-               misma linea en sus respectivas variables 
+               misma linea en sus respectivas variables
 
 
           */

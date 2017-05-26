@@ -13,7 +13,8 @@ struct datos{
 // Funciones de Ruleta.h
 void addPlayer(struct datos jugador, char * jugadores);
 void listarJugadores(char * jugadores, int * numeroJugadores);
-char * activarJugador(char * jugadores, int opJugador);
+void activarJugador(char * jugadores, int opJugador, char * jugadorActivo);
+// void hacerApuesta(char * jugadores, char * jugadorActivo);
 // Funciones adicionales
 struct datos limpiarCadena(struct datos jugador);
 
@@ -24,7 +25,7 @@ int main (int argc,char ** argv){
      struct datos jugador;
      char jugadores[]="Jugadores.txt";
      char jugadorActivo[30];
-     int numeroJugadores = 0,opJugador=0;
+     int numeroJugadores = 0, opJugador=0;
 
      while (opcion!=0) {
 
@@ -82,7 +83,7 @@ int main (int argc,char ** argv){
                     printf("\nOpcion → \n");
                     scanf("%i",&opJugador);
 
-                    jugadorActivo = activarJugador(jugadores,opJugador);
+                    activarJugador(jugadores,opJugador,jugadorActivo);
 
                     printf("\nEl jugador activo ahora es → %s \n",jugadorActivo);
 
@@ -221,7 +222,7 @@ void listarJugadores(char * jugadores, int * numeroJugadores){
 
 }
 
-char * activarJugador(char * jugadores, int opJugador){
+void activarJugador(char * jugadores, int opJugador, char * jugadorActivo){
 
      FILE * f;
      char cad[100];
@@ -240,16 +241,14 @@ char * activarJugador(char * jugadores, int opJugador){
 
      }
 
-     while((fgets(cad,"%s %s %s %i\n",f))!=NULL){
+     while((fgets(cad,100,f))!=NULL){
 
           sscanf(cad,"%s %s %s %i\n",aux.nombre,aux.apellidos,aux.DNI,&aux.saldo);
 
                if(i == opJugador){
 
-                    strcpy(id,aux.DNI);
-                    strcat(id,aux.nombre);
-
-                    return id;
+                    strcpy(jugadorActivo,aux.DNI);
+                    strcat(jugadorActivo,aux.nombre);
 
                }
 
