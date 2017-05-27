@@ -14,6 +14,7 @@ struct Ficha_alumno {
 void escribirFichero(char * nombreFichero, struct Ficha_alumno alumno);
 int contarRegistros(char * nombreFichero);
 void listarAlumnos(char * nombreFichero, struct Ficha_alumno * vector);
+void ordenar(char * nombreFichero, char * orden);
 
 // Funciones adicionales
 struct Ficha_alumno * reservaVector(char * nombreFichero);
@@ -24,7 +25,7 @@ int main(int argc,char **argv){
      struct Ficha_alumno alumno;
      struct Ficha_alumno * vector;
      int nRegistros = 0, op = 1, i = 0;
-     char nombreFichero[20];
+     char nombreFichero[20],orden[12];
 
 
      if(argc != 3){
@@ -88,7 +89,7 @@ int main(int argc,char **argv){
                break;
                case 3:
 
-
+                    ordenar(nombreFichero,orden);
 
                break;
                case 4:
@@ -213,6 +214,41 @@ void listarAlumnos(char * nombreFichero, struct Ficha_alumno * vector){
      fclose(f);
 
 }
+
+void ordenar(char * nombreFichero, char * orden){
+
+     void (*or)(char *);
+
+     if((strcmp(orden,"ascendente"))!=0){
+
+          printf("\norden ascendente\n");
+          or = &ascendente
+
+
+     }else{
+
+          printf("\norden descendente\n");
+          or = &descendente;
+
+     }
+
+}
+
+void ascendente(char * nombreFichero){
+
+     FILE * f, * aux;              // Fichero original y binario
+
+     ficheroAux[20] = "alumnosAux.bin";
+
+     if((f = fopen(nombreFichero,"rb"))==NULL){
+
+          
+
+     }
+
+
+}
+
 
 struct Ficha_alumno * reservaVector(char * nombreFichero){
 
