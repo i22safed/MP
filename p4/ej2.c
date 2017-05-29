@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Prototipos __________________________________________________________________
+
 struct Ficha_alumno {
 
      char nombre[50];
@@ -9,506 +11,189 @@ struct Ficha_alumno {
      float nota;
 
 };
-
-// Funciones del programa
-void escribirFichero(char * nombreFichero, struct Ficha_alumno alumno);
 int contarRegistros(char * nombreFichero);
-void listarAlumnos(char * nombreFichero, struct Ficha_alumno * vector);
-void descendente(char * nombreFichero);
-void ascendente(char * nombreFichero);
+struct Ficha_alumno * reservaVector(int numeroRegistros);
+void leerAlumnos(char * nombreFichero, struct Ficha_alumno * vector);
+void listarAlumnos(struct Ficha_alumno * vector, int numeroRegistros);
+void seleccionDirecta(struct Ficha_alumno * vector,int numeroRegistros, int (*orden)(int, int));
+int mayor(int a, int b);
+int menor(int a, int b);
+void liberarMemoria(struct Ficha_alumno * vector);
 
-// Funciones adicionales
-struct Ficha_alumno * reservaVector(char * nombreFichero);
-
+// Main ________________________________________________________________________
 
 int main(int argc,char **argv){
 
-     // Variables para funciones de escribir, contar, listar reservar memoria
+     // Variables
 
-     struct Ficha_alumno alumno;
+     char nombreFichero[20], or[20];
+     int numeroRegistros = 0;
      struct Ficha_alumno * vector;
-     int nRegistros = 0, op = 1, i = 0;
-     char nombreFichero[20],orden[12];
 
-     // Puntero a funciones para el orden ascendente / descendente
+     // Puntero a funcion
 
-     void (*or)(char *);
-
+     int (*orden)(int, int);
 
      if(argc != 3){
-
-          printf("\nEl formato de los argumentos es ./salida.exe alumnos.bin ascendente/descendente\n");
+          printf("\nEjecución ./salida.exe alumnos.bin ascendente/descendente\n");
           return 0;
-
      }
 
      strcpy(nombreFichero,argv[1]);
      printf("\nEl nombre del fichero es → %s\n",nombreFichero);
-     strcpy(orden,argv[2]);
-     printf("\nY el orden es %s \n",orden);
+     strcpy(or,argv[2]);
+     printf("\nY el orden es %s \n",or);
 
-
-     while (op!=0) {
-
-          printf("\n__________________MENU PRINCIPAL_____________________\n");
-
-          printf("\nElija una opción:\n");
-          printf("\n1. Añadir alumno.");
-          printf("\n2. Listar alumnos. ");
-          printf("\n3. Ordenar fichero.");
-          printf("\n4. Eliminar alumno. ");
-          printf("\n5. Ranking de notas. ");
-          printf("\n0. Salir del programa. \n");
-          printf("\nElija una opcion → ");
-          scanf("%i",&op);
-          getchar();
-
-          switch (op) {
-               case 1:
-
-                    printf("\nIntroduzca el nombre del alumno → ");
-                    gets(alumno.nombre);
-
-                    if(alumno.nombre[strlen(alumno.nombre - 1 )] == '\n'){
-
-                         alumno.nombre[strlen(alumno.nombre - 1 )] = '\0';
-
-                    }
-
-                    printf("\nIntroduzca el DNI → ");
-                    scanf("%i",&alumno.DNI);
-                    printf("\nIntroduzca la nota → ");
-                    scanf("%f",&alumno.nota);
-
-                    escribirFichero(nombreFichero,alumno);
-
-                    nRegistros = contarRegistros(nombreFichero);
-                    printf("\nEl numero de registros del fichero es %i \n",nRegistros);
-
-
-
-
-               break;
-               case 2:
-
-                    vector = reservaVector(nombreFichero);
-
-                    listarAlumnos(nombreFichero,vector);
-
-               break;
-               case 3:
-
-                    if((strcmp(orden,"ascendente"))==0){
-
-                         printf("\norden ascendente\n");
-                         or = &ascendente;
-                         (*or)(nombreFichero);
-                         printf("\nEl fichero %s ha sido ordenado de manera %s por DNI\n",nombreFichero,orden);
-
-
-                    }else{
-
-                         printf("\norden descendente\n");
-                         or = &descendente;
-                         (*or)(nombreFichero);
-                         printf("\nEl fichero %s ha sido ordenado de manera %s por DNI\n",nombreFichero,orden);
-
-
-                    }
-
-               break;
-               case 4:
-
-
-
-               break;
-               case 5:
-
-
-
-               break;
-               case 0:
-
-                    printf("\nAdioos\n");
-                    exit(-1);
-
-               break;
-          }
+     if((strcmp(or,"ascendente"))==0){
+          orden = &menor;
+     }else{
+          orden = &mayor;
      }
+
+     // Leemos el fichero para averiguar el numero de registros del mismo
+     numeroRegistros = contarRegistros(nombreFichero);
+     printf("\nEl numero de registros es → %i\n",numeroRegistros);
+     // Reservamos para poder listar
+     vector = reservaVector(numeroRegistros);
+     // Rellenamos el vector con los elemetos del fichero
+     leerAlumnos(nombreFichero,vector);
+     // Listamos los elementos del vector
+     listarAlumnos(vector,numeroRegistros);
+     // Ordenamos el vector con el algoritmo de selección directa
+     seleccionDirecta(vector,numeroRegistros,orden);
+
+     printf("\nLista de alumnos ordenados por seleccion directa de manera %s\n",argv[2]);
+
+     listarAlumnos(vector,numeroRegistros);
+
+     liberarMemoria(vector);
+
 
 
      return 0;
 }
 
-void escribirFichero(char * nombreFichero, struct Ficha_alumno alumno){
-
-     FILE * f;
-
-     if((f = fopen(nombreFichero,"rb")) == NULL){
-
-          printf("\nEl fichero %s no existe, se creará a continuación \n",nombreFichero);
-          f = fopen(nombreFichero,"wb");
-
-          if(f != NULL){
-
-               printf("\nEl fichero %s se ha creado correctamente\n",nombreFichero);
-
-          }else{
-
-               printf("\nError al crear el fichero\n");
-               exit(-1);
-
-          }
-
-
-     }else{
-
-          printf("\nEl fichero %s se ha abierto correctamente\n",nombreFichero);
-          fclose(f);
-          f = fopen(nombreFichero,"ab");
-
-     }
-
-
-     fwrite(&alumno,sizeof(struct Ficha_alumno),1,f);
-
-
-     fclose(f);
-
-}
+// Funciones ___________________________________________________________________
 
 int contarRegistros(char * nombreFichero){
 
      FILE * f;
 
-     int n=0;
+     int nRegistros = 0;
 
-     if((f = fopen(nombreFichero,"rb"))==NULL){
-
+     if((f=fopen(nombreFichero,"rb"))==NULL){
           printf("\nError al abrir el fichero %s \n",nombreFichero);
           exit(-1);
-
      }else{
-
           printf("\nEl fichero %s se ha abierto correctamente\n",nombreFichero);
-
      }
 
      if(fseek(f,0L,SEEK_END)){
-
-          printf("\nNo se puede abrir el fichero %s \n",nombreFichero);
-          exit(-1);
-
+          printf("\nNo se ha podido manipular el fichero %s\n",nombreFichero);
      }
 
-     n = ftell(f);
-
+     nRegistros = ftell(f);
      fclose(f);
 
-     return (n/sizeof(struct Ficha_alumno));
+     return nRegistros/sizeof(struct Ficha_alumno);
 
 }
 
-void listarAlumnos(char * nombreFichero, struct Ficha_alumno * vector){
-
-     FILE * f;
-     int i = 0;
-     int nRegistros = contarRegistros(nombreFichero);
-
-     if((f = fopen(nombreFichero,"rb"))==NULL){
-
-          printf("\nEl fichero %s no se ha podido abrir\n",nombreFichero);
-          exit(-1);
-
-     }else{
-
-          printf("\nEl fichero %s se ha abierto correctamente\n",nombreFichero);
-
-     }
-
-     while(fread(&vector[i],sizeof(struct Ficha_alumno),1,f)==1){
-
-          printf("\n\nAlumno %i__________________________",i);
-          printf("\nNombre → %s",vector[i].nombre);
-          printf("\nDNI → %i",vector[i].DNI);
-          printf("\nNota → %f",vector[i].nota);
-          i++;
-
-     }
-
-     fclose(f);
-
-}
-
-void ascendente(char * nombreFichero){
-
-     FILE * f, *aux;         // Fichero original y binario
-
-     int registros = 0, menor = 0;
-     int i = 0, k = 0;
-
-     struct Ficha_alumno * alumnos;
-     struct Ficha_alumno auxiliar;
-
-     char ficheroAux[20] = "alumnosAux.bin";
-
-     // Abrimos el fichero original
-
-     if((f = fopen(nombreFichero,"rb"))==NULL){
-
-          printf("\nError al abrir el archivo %s \n",nombreFichero);
-          exit(-1);
-
-     }else{
-
-          printf("\nEl fichero %s se ha abierto co1rrectamente\n",nombreFichero);
-
-     }
-
-     // Abrimos el fichero auxiliar
-
-     if((aux = fopen(ficheroAux,"rb"))==NULL){
-
-          printf("\nError al abrir el archivo %s, se creará\n",ficheroAux);
-
-          if(( aux = fopen(ficheroAux,"wb"))==NULL){
-
-               printf("\nNo se ha podido crear el fichero %s \n",ficheroAux);
-
-          }else{
-
-               printf("\nSe ha creado el fichero %s correctamente \n",ficheroAux);
-
-          }
-
-
-     }else{
-
-          printf("\nEl fichero %s se ha abierto correctamente\n",ficheroAux);
-          fclose(aux);
-          aux = fopen(ficheroAux,"wb");
-
-     }
-
-
-     // Declaramos el vector auxiliar para volcarlos y leemos el fichero y un
-     // vector auxiliar para ordenarlos
-
-     registros = contarRegistros(nombreFichero);
-     alumnos = reservaVector(nombreFichero);
-
-
-     // Bucle para la lectura
-
-     while (fread(&alumnos[i],sizeof(struct Ficha_alumno),1,f)==1) {
-
-          i++;
-     }
-
-     // Bucle para la ordenación
-
-     for(i=1; i<registros; i++){
-
-          menor = i;
-
-               for(k=i+1 ; k < registros ; k++){
-
-                    if(alumnos[k].DNI < alumnos[menor].DNI){
-
-                         menor = k;
-
-                    }
-
-               }
-
-          auxiliar = alumnos[menor];
-          alumnos[menor] = alumnos[i];
-          alumnos[i] = auxiliar;
-
-     }
-
-     // Escribimos en el fichero
-
-     for(i=0;i<registros;i++){
-
-          fwrite(&alumnos[i],sizeof(struct Ficha_alumno),1,aux);
-
-     }
-
-
-     free(alumnos);
-     fclose(f);
-     fclose(aux);
-
-     if(remove(nombreFichero)==0){
-
-          printf("\nEl fichero %s se ha borrado correctamente\n", nombreFichero);
-
-     }else{
-
-          printf("\nError al borrar el fichero %s\n",nombreFichero);
-
-     }
-
-     if((rename(ficheroAux,nombreFichero))==0){
-
-          printf("\nSe ha cambiado el nombre de %s a %s \n",ficheroAux,nombreFichero);
-
-     }else{
-
-          printf("\nError al renombrar el fichero %s\n",ficheroAux);
-
-     }
-
-}
-
-void descendente(char * nombreFichero){
-
-     FILE * f;
-
-/*  Parte copiada y modificada de la funcion ascendente
-
-     → ARREGLAR PARTE DEL BUCLE DE ORDENACION
-
-          FILE * f, *aux;         // Fichero original y binario
-
-          int registros = 0, menor = 0;
-          int i = 0, k = 0;
-
-          struct Ficha_alumno * alumnos;
-          struct Ficha_alumno auxiliar;
-
-          char ficheroAux[20] = "alumnosAux.bin";
-
-          // Abrimos el fichero original
-
-          if((f = fopen(nombreFichero,"rb"))==NULL){
-
-               printf("\nError al abrir el archivo %s \n",nombreFichero);
-               exit(-1);
-
-          }else{
-
-               printf("\nEl fichero %s se ha abierto co1rrectamente\n",nombreFichero);
-
-          }
-
-          // Abrimos el fichero auxiliar
-
-          if((aux = fopen(ficheroAux,"rb"))==NULL){
-
-               printf("\nError al abrir el archivo %s, se creará\n",ficheroAux);
-
-               if(( aux = fopen(ficheroAux,"wb"))==NULL){
-
-                    printf("\nNo se ha podido crear el fichero %s \n",ficheroAux);
-
-               }else{
-
-                    printf("\nSe ha creado el fichero %s correctamente \n",ficheroAux);
-
-               }
-
-
-          }else{
-
-               printf("\nEl fichero %s se ha abierto correctamente\n",ficheroAux);
-               fclose(aux);
-               aux = fopen(ficheroAux,"wb");
-
-          }
-
-
-          // Declaramos el vector auxiliar para volcarlos y leemos el fichero y un
-          // vector auxiliar para ordenarlos
-
-          registros = contarRegistros(nombreFichero);
-          alumnos = reservaVector(nombreFichero);
-
-
-          // Bucle para la lectura
-
-          while (fread(&alumnos[i],sizeof(struct Ficha_alumno),1,f)==1) {
-
-               i++;
-          }
-
-          // Bucle para la ordenación
-
-          for(i=1; i<registros; i++){
-
-               menor = i;
-
-                    for(k=i+1 ; k < registros ; k++){
-
-                         if(alumnos[k].DNI > alumnos[menor].DNI){
-
-                              k = menor;
-
-                         }
-
-                    }
-
-               auxiliar = alumnos[k];
-               alumnos[k] = alumnos[i];
-               alumnos[i] = auxiliar;
-
-          }
-
-          // Escribimos en el fichero
-
-          for(i=0;i<registros;i++){
-
-               fwrite(&alumnos[i],sizeof(struct Ficha_alumno),1,aux);
-
-          }
-
-
-          free(alumnos);
-          fclose(f);
-          fclose(aux);
-
-          if(remove(nombreFichero)==0){
-
-               printf("\nEl fichero %s se ha borrado correctamente\n", nombreFichero);
-
-          }else{
-
-               printf("\nError al borrar el fichero %s\n",nombreFichero);
-
-          }
-
-          if((rename(ficheroAux,nombreFichero))==0){
-
-               printf("\nSe ha cambiado el nombre de %s a %s \n",ficheroAux,nombreFichero);
-
-          }else{
-
-               printf("\nError al renombrar el fichero %s\n",ficheroAux);
-
-          }
-
-*/
-
-}
-
-struct Ficha_alumno * reservaVector(char * nombreFichero){
+struct Ficha_alumno * reservaVector(int numeroRegistros){
 
      struct Ficha_alumno * aux;
-     int nRegs = 0;
 
-     nRegs = contarRegistros(nombreFichero);
-
-     if((aux = (struct Ficha_alumno *)calloc(sizeof(struct Ficha_alumno),nRegs))==NULL){
-
-          printf("\nNo ha sido posible la reserva de memoria para %i elementos \n",nRegs);
-
+     if((aux = (struct Ficha_alumno *)calloc(sizeof(struct Ficha_alumno),numeroRegistros))==NULL){
+          printf("\nError al reservar memoria\n");
+          exit(-1);
      }else{
-
-          printf("\nSe ha reservado memoria para %i elementos \n",nRegs);
-
+          printf("\nMemoria reservada correctamente para %i elementos\n",numeroRegistros);
      }
 
      return aux;
+
+}
+
+void leerAlumnos(char * nombreFichero, struct Ficha_alumno * vector){
+
+     FILE * f;
+     int i = 0;
+
+     if((f = fopen(nombreFichero,"rb"))==NULL){
+          printf("\nError al abrir el fichero %s\n",nombreFichero);
+          exit(-1);
+     }else{
+          printf("\nEl fichero %s se ha abierto correctamente\n",nombreFichero);
+     }
+
+     while (fread(&vector[i],sizeof(struct Ficha_alumno),1,f)==1){
+          i++;
+     }
+
+     fclose(f);
+
+}
+
+void listarAlumnos(struct Ficha_alumno * vector, int numeroRegistros){
+
+     int i = 0;
+
+     for(i=0;i<numeroRegistros;i++){
+          printf("\n\nPersona %i ______________",i);
+          printf("\nNombre → %s",vector[i].nombre);
+          printf("\nDNI → %i",vector[i].DNI);
+          printf("\nNota → %.2f",vector[i].nota);
+     }
+
+     printf("\n");
+
+}
+
+void seleccionDirecta(struct Ficha_alumno * vector,int numeroRegistros, int (*orden)(int, int)){
+
+     int i=0,k=0,menor=0;
+     struct Ficha_alumno auxiliar;
+
+     for(i=0;i<numeroRegistros-1;i++){
+          menor = i;
+
+          for(k=i+1;k<numeroRegistros;k++){
+               if((*orden)((vector+k)->DNI,(vector+menor)->DNI)){
+                    menor = k;
+               }
+          }
+
+          auxiliar = vector[i];
+          vector[i] = vector[menor];
+          vector[menor] = auxiliar;
+
+     }
+
+}
+
+int mayor(int a, int b){
+
+     if(a>b){
+          return 1;
+     }else{
+          return 0;
+     }
+
+}
+
+int menor(int a, int b){
+
+     if(a<b){
+          return 1;
+     }else{
+          return 0;
+     }
+
+}
+
+void liberarMemoria(struct Ficha_alumno * vector){
+
+     free(vector);
+     vector = NULL;
 
 }
