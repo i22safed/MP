@@ -134,21 +134,6 @@ void leerAlumnos(char * nombreFichero, struct Ficha_alumno * vector){
 
 }
 
-void listarAlumnos(struct Ficha_alumno * vector, int numeroRegistros){
-
-     int i = 0;
-
-     for(i=0;i<numeroRegistros;i++){
-          printf("\n\nPersona %i ______________",i);
-          printf("\nNombre → %s",vector[i].nombre);
-          printf("\nDNI → %i",vector[i].DNI);
-          printf("\nNota → %.2f",vector[i].nota);
-     }
-
-     printf("\n");
-
-}
-
 void seleccionDirecta(struct Ficha_alumno * vector,int numeroRegistros, int (*orden)(int, int)){
 
      int i=0,k=0,menor=0;
@@ -158,7 +143,7 @@ void seleccionDirecta(struct Ficha_alumno * vector,int numeroRegistros, int (*or
           menor = i;
 
           for(k=i+1;k<numeroRegistros;k++){
-               if((*orden)((vector+k)->DNI,(vector+menor)->DNI)){
+               if((*orden)(vector[k].DNI,vector[menor].DNI)){
                     menor = k;
                }
           }
@@ -168,6 +153,23 @@ void seleccionDirecta(struct Ficha_alumno * vector,int numeroRegistros, int (*or
           vector[menor] = auxiliar;
 
      }
+
+}
+
+void listarAlumnos(struct Ficha_alumno * vector, int numeroRegistros){
+
+     int i = 0;
+
+     for(i=0;i<numeroRegistros;i++){
+
+          printf("\n\nPersona %i___________",i);
+          printf("\nNombre → %s",vector[i].nombre);
+          printf("\nDNI → %i",vector[i].DNI);
+          printf("\nNota → %.2f",vector[i].nota);
+
+     }
+
+     printf("\n");
 
 }
 
